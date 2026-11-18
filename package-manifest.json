@@ -1,0 +1,195 @@
+{
+  "title": "Unknotting the trefoil with a partner",
+  "authors": [
+    "Anne Dranowski",
+    "Yura Kabkov",
+    "Daniel Tubbenhauer"
+  ],
+  "repository": "https://github.com/dtubbenhauer/unknot-trefoil",
+  "snapshot_date": "2026-11-19",
+  "entry_points": {
+    "readme": "README.md",
+    "paper": "paper/trefoil-partners.pdf",
+    "manuscript_source": "paper/source/main.tex",
+    "ai_guide": "AI_README.md",
+    "searchable_paper": "ai/paper.md",
+    "numbered_results": "ai/theorem-index.json",
+    "verification": "code/README.md",
+    "figures": "figures/README.md",
+    "citation": "CITATION.cff"
+  },
+  "validation": {
+    "geometry": "Verified both augmented parity templates and the m = 2 witness with SnapPy 3.3.2 and Spherogram 2.4.1.",
+    "seed": "Replayed m = 2 from the filled rational tangle replacements.",
+    "arithmetic": "Checked the Owens obstruction for determinant 245.",
+    "paper": "Rebuilt with latexmk and compared extracted text to the included seven-page PDF."
+  },
+  "hash_scope": "Every file in this archive except package-manifest.json.",
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 224,
+      "sha256": "f57c9f13783ffa8bf18ef1b2bb3a02f7bcfe3967745b354c55d5e8c394cdbcfa"
+    },
+    {
+      "path": "AI_README.md",
+      "bytes": 2652,
+      "sha256": "ba100e0946a1b19eaf37dd9f6f76296660f2bba3723f9f1110cbefd2f171cce5"
+    },
+    {
+      "path": "CITATION.cff",
+      "bytes": 621,
+      "sha256": "6a2bb1bb5834b8566c2a2d71379bb2134dfdb10bc595a0a0508ffb26fda024bb"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1211,
+      "sha256": "6b0382b16279f26ff69014300541967a356a666eb0b91b422f6862f6b7dad17e"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2761,
+      "sha256": "dfc80ba9ae178273db0cc6c0a6936e2658d61435fe4950d2174c0a00600bce6e"
+    },
+    {
+      "path": "ai/paper.md",
+      "bytes": 24841,
+      "sha256": "d6a84d19b7af9819eac9b292f7e3d5d4b848b6f6ee4ed5305e764a4d86cf0409"
+    },
+    {
+      "path": "ai/theorem-index.json",
+      "bytes": 3948,
+      "sha256": "0448347b3d40727f26127bc42b80fa0a15862dca8719024b8f2d82bf8b996df6"
+    },
+    {
+      "path": "code/README.md",
+      "bytes": 2380,
+      "sha256": "ea21fcd0b62f1299adf2df0ab3ca9288521f9a3414968eabf85957a9f4e96aa4"
+    },
+    {
+      "path": "code/requirements.txt",
+      "bytes": 32,
+      "sha256": "3953a66abdba57112fb895c172a90c0eb3f9ebf75d42430c2c015ee8548fac75"
+    },
+    {
+      "path": "code/seed_pd.json",
+      "bytes": 19820,
+      "sha256": "c19b250791fe240999c300c4bb25cfc0604e94923483c49037fea0c146da19f5"
+    },
+    {
+      "path": "code/trefoil_geometry.json",
+      "bytes": 93639,
+      "sha256": "3e8fe6ce37453e0608e50a2e2fcea52060e2bd4e77bda292ceaecd6c70d26067"
+    },
+    {
+      "path": "code/verify_seed.py",
+      "bytes": 5612,
+      "sha256": "a3f638ce6292721af69a65f107dc95c69f2a21ace9a77d5bdd853d1562b248da"
+    },
+    {
+      "path": "code/verify_trefoil.py",
+      "bytes": 12944,
+      "sha256": "750bf3d215121c094d6a87640d8b9cf21a980328119076d5d62ded19ea1e6e98"
+    },
+    {
+      "path": "code/verify_trefoil_lower.py",
+      "bytes": 4247,
+      "sha256": "a1d6959eebd99970c3dc0c49bb74060b00944b48b2bc332e14da7c3fec87a76b"
+    },
+    {
+      "path": "figures/README.md",
+      "bytes": 906,
+      "sha256": "6ccbf0e3748ed9602f60f0e66db7e6a3c72f6a6af370a73689aedef232d52652"
+    },
+    {
+      "path": "figures/axis.svg",
+      "bytes": 19569,
+      "sha256": "e9a96b62c427caa7d25cc0117097b7af441d8e91c2965be120813a922e1e4ae6"
+    },
+    {
+      "path": "figures/boxes.svg",
+      "bytes": 30208,
+      "sha256": "80f407891b48ea5f8eeb0ad1a502e0d580701a7ad8182135337317a3c0c464eb"
+    },
+    {
+      "path": "figures/cap.svg",
+      "bytes": 57656,
+      "sha256": "b9fe7efd2531616f6789e6b569e1e91127957ea7eb8bc23566428eb0832077e5"
+    },
+    {
+      "path": "llms.txt",
+      "bytes": 999,
+      "sha256": "3c4da70284bab4a7c13b38145914bb3a75d321e4031bc1102d3998482ebd911f"
+    },
+    {
+      "path": "paper/source/figs/axis.tex",
+      "bytes": 949,
+      "sha256": "12d1e89e849bd4c50d8cfcb4f5de4ac55b114a577dcb82a3df49286fe30b55ce"
+    },
+    {
+      "path": "paper/source/figs/boxes.tex",
+      "bytes": 754,
+      "sha256": "f88119d10a0abc3d2b67055cc64f74c2c1bbc3d04af709e04b00bdd55b2e0680"
+    },
+    {
+      "path": "paper/source/figs/cap.tex",
+      "bytes": 1409,
+      "sha256": "f062c3e2f668d24eb19053391efe635db2dc251189a4b2abc6e889fb7ec2784e"
+    },
+    {
+      "path": "paper/source/figs/draw_parities.py",
+      "bytes": 9257,
+      "sha256": "57fda161f12c87aae7367aa93ee9c59552699295f75491649d96a5357860b310"
+    },
+    {
+      "path": "paper/source/figs/make_movie.py",
+      "bytes": 8301,
+      "sha256": "a5e0e39a51bcafb5f1dac8c7a69d532b768d0ec2610f566b32861c1de86f4113"
+    },
+    {
+      "path": "paper/source/figs/marked-parities.pdf",
+      "bytes": 12005,
+      "sha256": "1516d4365fb71869b4dab468fccd2a27a44e07e2c4f9dfc793b1dd98f4cb6351"
+    },
+    {
+      "path": "paper/source/figs/marked-parities.svg",
+      "bytes": 14307,
+      "sha256": "b90034875249a429c5aa9301ffab6addeaeb78e3c9c46eadf3893d428a0f2dce"
+    },
+    {
+      "path": "paper/source/figs/split-seed.pdf",
+      "bytes": 5617,
+      "sha256": "44bafed91a910fb9ed3a15d483c64607bed4d6a38b670746dedf9152a6970ecc"
+    },
+    {
+      "path": "paper/source/figs/split-seed.svg",
+      "bytes": 5098,
+      "sha256": "ddd40afce9afd0b617c0cf9edcb66585dc6043398f8ccfb714b576b3950be04f"
+    },
+    {
+      "path": "paper/source/figs/trefoil-movie.pdf",
+      "bytes": 18416,
+      "sha256": "79e7b0827f9ece785e9ef07f6ac2f27982edb8dccdb5e7683747ab5e92898714"
+    },
+    {
+      "path": "paper/source/figs/trefoil-movie.svg",
+      "bytes": 28165,
+      "sha256": "8417afb3f0a3f3b363499bfb934fcb8640dc11cad2673f957340c382a942449a"
+    },
+    {
+      "path": "paper/source/lower.tex",
+      "bytes": 7868,
+      "sha256": "0f0d3129a50f093836aed94e575b1317eadc7e34a833ac4233ea55cf6069df8f"
+    },
+    {
+      "path": "paper/source/main.tex",
+      "bytes": 18004,
+      "sha256": "ebc839ecef88f51a18caec3c1c4b88fd6f6d5c745c9eefd652dacbc0b5847931"
+    },
+    {
+      "path": "paper/trefoil-partners.pdf",
+      "bytes": 312157,
+      "sha256": "fcc3dbe0a03ab3d7e7334dbd3588f0773b5eb31cbe3c4100d7da12f559bde8bf"
+    }
+  ]
+}

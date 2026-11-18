@@ -1,0 +1,101 @@
+{
+  "title": "Unknotting the trefoil with a partner",
+  "authors": ["Anne Dranowski", "Yura Kabkov", "Daniel Tubbenhauer"],
+  "paper": "paper/trefoil-partners.pdf",
+  "numbered_results": [
+    {
+      "number": "1A.1",
+      "kind": "Theorem",
+      "description": "Let T be a trefoil. Let P_m be the numerator closure of the rational tangle of fraction (104m+37)/104, with signature opposite in sign to that of T. For m = 2, 4 and every integer m >= 6, the knots P_m are pairwise distinct prime two-bridge knots with u(P_m) = 3 and 2 <= u(T # P_m) <= 3 < 4 = u(T) + u(P_m). The knot P_2 is 14a7385 up to mirror.",
+      "manuscript": {
+        "path": "paper/source/main.tex",
+        "line": 83,
+        "href": "../paper/source/main.tex#L83",
+        "label": "thm:trefoil",
+        "pdf_page": 1
+      },
+      "proof_sections": ["2", "3"],
+      "proof_wrap_up": {
+        "path": "paper/source/main.tex",
+        "line": 180,
+        "href": "../paper/source/main.tex#L180"
+      },
+      "computational_checks": [
+        "code/verify_trefoil.py",
+        "code/verify_seed.py",
+        "code/verify_trefoil_lower.py"
+      ]
+    },
+    {
+      "number": "1B.1",
+      "kind": "Corollary",
+      "description": "For every m in Theorem 1A.1, choose P_m with the chirality for the positive trefoil. Every nontrivial positive trefoil plumbing K satisfies u(K # P_m) <= u(K) + 2 < u(K) + u(P_m). This includes every nontrivial positive braid knot and, up to mirroring both summands, every nontrivial torus knot.",
+      "manuscript": {
+        "path": "paper/source/main.tex",
+        "line": 97,
+        "href": "../paper/source/main.tex#L97",
+        "label": "cor:braids",
+        "pdf_page": 2
+      },
+      "proof": {
+        "path": "paper/source/main.tex",
+        "line": 105,
+        "href": "../paper/source/main.tex#L105"
+      },
+      "uses": ["1A.1"]
+    }
+  ],
+  "proof_notes": [
+    {
+      "name": "Three changes for the first partner",
+      "section": "2A",
+      "description": "Figure 2 traces the three crossing changes for T # 14a7385. The independent replay constructs the three tangle replacements directly and checks the filled witness.",
+      "manuscript": {
+        "path": "paper/source/main.tex",
+        "line": 113,
+        "href": "../paper/source/main.tex#L113",
+        "label": "sub:marked",
+        "pdf_page": 2
+      },
+      "computational_checks": ["code/verify_seed.py"]
+    },
+    {
+      "name": "Uniform three-change upper bound",
+      "section": "2D",
+      "description": "The geometric replay checks both augmented parity representatives, including the splitting sphere, final unlink and marked exterior identifications. The paper uses the peripheral maps to carry the three-change sequence through all specified fillings.",
+      "manuscript": {
+        "path": "paper/source/main.tex",
+        "line": 146,
+        "href": "../paper/source/main.tex#L146",
+        "label": "sub:maps",
+        "pdf_page": 3
+      },
+      "computational_checks": ["code/verify_trefoil.py"]
+    },
+    {
+      "name": "Lattice obstruction to two changes",
+      "section": "3A",
+      "description": "The diagonal-lattice argument rules out u(P_m) = 2 for m = 4 and every integer m >= 6.",
+      "manuscript": {
+        "path": "paper/source/lower.tex",
+        "line": 13,
+        "href": "../paper/source/lower.tex#L13",
+        "label": "sub:lattice",
+        "pdf_page": 4
+      }
+    },
+    {
+      "name": "Correction-term obstruction at determinant 245",
+      "section": "3B",
+      "description": "For P_2, exact rational calculations rule out the correction-term inequalities required by Owens's two-change obstruction.",
+      "manuscript": {
+        "path": "paper/source/lower.tex",
+        "line": 49,
+        "href": "../paper/source/lower.tex#L49",
+        "label": "sub:determinant245",
+        "pdf_page": 5
+      },
+      "computational_checks": ["code/verify_trefoil_lower.py"]
+    }
+  ]
+}

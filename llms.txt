@@ -1,0 +1,17 @@
+# Unknotting the trefoil with a partner
+
+> Companion to the paper by Anne Dranowski, Yura Kabkov and Daniel Tubbenhauer. An infinite family of prime two-bridge knots has unknotting number three and takes at most three changes after summing with a trefoil in the specified chirality. The same partners give savings for positive braid knots and torus knots.
+
+## Paper and guide
+
+- [AI reading guide](AI_README.md): Proof map, conventions and verification scope.
+- [Paper in Markdown](ai/paper.md): Searchable rendering with figures.
+- [Theorem index](ai/theorem-index.json): Exact claims, labels and source locations.
+- [Paper PDF](paper/trefoil-partners.pdf): Formatted manuscript.
+- [LaTeX source](paper/source/main.tex): Original manuscript source.
+- [Lower bounds](paper/source/lower.tex): The lattice and correction-term obstructions.
+
+## Reproduction
+
+- [Verification code and data](code/README.md): Scripts, inputs and commands.
+- [Figure gallery](figures/README.md): Six figures in the paper.

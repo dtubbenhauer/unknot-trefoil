@@ -1,0 +1,82 @@
+\section{The partners need three changes}\label{sec:lower}
+
+Write $p=104m+37$ and choose the mirror $H_m$ of the two-bridge knot $P_m$ so that its oriented branched double cover $\Sigma(H_m)$ is $+p/104$ surgery on the unknot. Write $[a_1,\ldots,a_s]^-=a_1-1/[a_2,\ldots,a_s]^-$ for the negative continued fraction. The linear plumbing with these weights has boundary $[a_1,\ldots,a_s]^-$ surgery on the unknot. When all weights are even, its branch surface is an orientable plumbing of twisted annuli. The plumbing matrix is then a symmetrized Seifert matrix. In this convention
+\[
+ \frac{p}{104}=
+ \begin{cases}
+  [m,-2,2,2,2,2,4,-2]^- & \text{if $m\geq 2$ is even},\\
+  [m+1,2,2,-4,4,2]^- & \text{if $m\geq 1$ is odd}.
+ \end{cases}
+\]
+Eliminating from the right gives two negative pivots in the first line and one in the second. The final pivot $p/104$ is positive in both. Thus $\sigma(H_m)=4$, so $u(H_m)\geq 2$. In the crossing convention of \cite{Owens}, a two-change unknotting has to switch two negative crossings.
+
+\subsection{The lattice obstruction}\label{sub:lattice}
+For $m=4$ or $m\geq6$ we can rule out two changes using the shapes of the plumbing and the filling. The vectors of squared norm two account for all but one coordinate. The three heavier plumbing vertices cannot fit in the remaining pattern.
+
+If $u(H_m)=2$, Owens's surgery theorem \cite[Theorem~3 and Lemma~2.2]{Owens} gives a simply connected positive definite filling $W$ of $\Sigma(H_m)$. Its rank is four, its intersection determinant is $p$, and its basis contains two orthogonal vectors of square two. On the other side, the chain
+\[
+ G=(\underbrace{2,\ldots,2}_{m-1},4,6,2,2,3)
+\]
+is a simply connected positive definite plumbing with boundary $-\Sigma(H_m)$. Indeed $[4,6,2,2,3]^-=141/37$ and adding the leading twos gives $p/(p-104)$. Gluing and applying Donaldson's theorem \cite{Donaldson} embeds $G\oplus W$ in the diagonal lattice $\mathbb{Z}^{m+8}$. The embedding is full rank by Mayer--Vietoris over $\mathbb Q$, and its index is $p$ since both determinants are $p$. In particular, the images of the joint basis are linearly independent modulo two.
+
+A square-two vector in the diagonal lattice is supported on two coordinates, with entries $\pm1$. Two of the basis vectors of square two cannot have the same support by independence modulo two. They therefore pair nontrivially exactly when they share one coordinate. Along a chain of $s$ such vectors, the supports form a path on $s+1$ coordinates, and a signed permutation makes the vectors $e_i-e_{i+1}$. Orthogonal chains use disjoint coordinates. The two chains of twos in $G$ and the two vectors of square two in $W$ therefore use blocks of size $m,3,2,2$, leaving a singleton coordinate, as in \autoref{fig:plumbing}.
+
+\begin{figure}[!ht]
+ \centering
+ \input{figs/cap.tex}
+ \caption{The positive plumbing and the blocks of coordinates. The green paths in the plumbing occupy the first two blocks. The two violet blocks come from the filling. The last coordinate is free.}
+ \label{fig:plumbing}
+\end{figure}
+
+Let $A,B,C$ be the vertices of weights $4,6,3$, respectively. On the long block $B,C$ are constant, and $A=(a,\ldots,a,a+1)$. On the triple their coordinates are
+\[
+ A=(z,z,z),\qquad B=(g-1,g,g),\qquad C=(\ell,\ell,\ell+1).
+\]
+All three vectors are constant on each pair block. The remaining pairings are $A\cdot B=-1$ and $A\cdot C=B\cdot C=0$.
+
+\smallskip
+\noindent\emph{The vertices $A$ and $C$.}
+The long block of $A$ contributes $ma^2+2a+1$ to $\lVert A\rVert^2=4$. This is one, or three if $m=4$ and $a=-1$. Thus $A$ has odd squared norm at most three outside that block. The norm bound $\lVert C\rVert^2=3$ forces $C$ to vanish on the long block. Its triple is either $(-1,-1,0)$ or $(0,0,1)$.
+
+In the first case $C$ has a unit at the singleton. Since the pairing on the triple is $-2z$, orthogonality forces $A$ to have even singleton. Its odd squared norm outside the long block then forces $z=\pm1$, and the triple uses all three units of square there. Now $A\cdot C=-2z\ne0$. Hence $C$ has triple $(0,0,1)$ and a unit pair. Pair blocks contribute evenly to $A\cdot C$, so $z$ is even. The norm bound gives $z=0$, and the singleton of $A$ is odd.
+
+\smallskip
+\noindent\emph{The vertex $B$.}
+Modulo two, the square-two vectors span exactly the vectors with even sum on each block, including the singleton. The pair-block sums of $B$ are even, as is its long-block sum. Indeed a nonzero long block requires at least $m$ units of squared norm, and the triple uses at least one. Thus the long block vanishes unless $m=4$, when its four entries still sum to an even number. Since $\lVert B\rVert^2=6$, the triple sum $3g-1$ and the singleton have the same parity. Independence modulo two forces them both odd. As $g\in\{-1,0,1\}$ by the norm bound, this means $g=0$.
+
+If $B$ vanishes on the long block, the five units of squared norm beyond its triple $(-1,0,0)$ force a unit on each pair and on the singleton. This gives $B\cdot C=\pm2$. Otherwise $m=4$, and the long block and triple use five units of squared norm, leaving one at the singleton. The long-block sum of $A$ is odd. Thus the long block and the singleton each contribute an odd integer to $A\cdot B$, making it even. Both cases contradict the required pairings, so $u(P_m)\geq3$ for $m=4$ and every $m\geq6$.
+
+\subsection{The determinant-245 knot}\label{sub:determinant245}
+For $m=2$ the partner is alternating and its cover is $Y=L(245,104)$, using positive surgery notation. Theorem~1 of \cite{Owens} requires a positive definite matrix
+\[
+ Q=\begin{pmatrix}h&1&a&0\\1&2&0&0\\a&0&s&1\\0&0&1&2\end{pmatrix},\qquad
+ (2h-1)(2s-1)-4a^2=245,
+\]
+where $0\leq a<h\leq s$ and $h,s$ are even. Since $245\geq(2h-1)^2-4(h-1)^2=4h-3$, the search has $h\leq62$. The solutions $(h,a,s)$ are $(2,1,42)$, $(4,0,18)$, $(8,5,12)$, $(14,11,14)$ and $(62,61,62)$. Cyclicity of $H^2(Y;\mathbb Z)$ excludes the second matrix, whose cokernel is $\mathbb Z/7\oplus\mathbb Z/35$.
+
+For any remaining $Q$ let $b(x)=x^tQ^{-1}x-1$. The covector $2x$ is characteristic because $Q$ is even. Centering the boundary structures at the unique spin structure identifies this covector with $[x]\in\operatorname{coker}Q$. The value of $b(x)$ is constant modulo $2$ on every such class, since $b(x+Qy)-b(x)=2y^tx+y^tQy$. The comparison of correction terms in \cite[Theorem~1]{Owens} therefore requires a single isomorphism $\phi\colon\operatorname{coker}Q\to\mathbb{Z}/245$ such that
+\[
+ b(x)-d(Y,\phi([x]))\in2\mathbb Z_{\geq0}\qquad(x\in\mathbb Z^4).
+\]
+Here $d(Y,j)=D(245,141,(70+j)\bmod245)$. Indeed $Y=-L(245,141)$ and in the recursion of \cite[Proposition~4.8]{OSz} for $d(-L(r,t),i)$ the spin label at $(r,t)=(245,141)$ is $70$. The recursion starts with $D(1,0,0)=0$ and reads
+\[
+ D(r,t,i)=\frac{rt-(2i+1-r-t)^2}{4rt}
+           -D(t,r\bmod t,i\bmod t).
+\]
+\begin{samepage}
+The tests below exclude the remaining matrices. Here all congruences are modulo $2\mathbb Z$.
+\begin{center}
+\begin{tabular}{@{}c c c l@{}}
+\toprule
+$(h,a,s)$ & $x$ & $b(x)$ & Consequence \\
+\midrule
+$(8,5,12)$ & $(-1,0,0,0)$  & $-199/245$ & No congruent correction term \\
+$(62,61,62)$ & $(-1,0,0,0)$  & $1/245$ & No congruent correction term \\
+$(14,11,14)$ & $(-1,0,-1,0)$ & $-45/49$ & Least congruent term is $53/49$ \\
+$(2,1,42)$ & $(0,0,-1,0)$  & $-239/245$ & Admissible units $\pm72$ \\
+$(2,1,42)$ & $(0,0,-2,0)$  & $-221/245$ & Admissible units $\pm23$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{samepage}
+For the last two rows the first row $(166,-83,-4,2)$ of $\operatorname{adj}(Q)$ gives an isomorphism $\operatorname{coker}Q\to\mathbb Z/245$. The tested covectors correspond to $[x]$ with labels $4$ and $8$, so the units in the table are the multipliers $v$ found by testing $d(Y,4v)$ and $d(Y,8v)$. The sets are disjoint. This rules out $u(P_2)=2$ and proves $u(P_2)\geq3$.

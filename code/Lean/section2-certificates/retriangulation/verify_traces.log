@@ -1,0 +1,12 @@
+0:partner_to_reference:source {'2-3': 17, '3-2': 9}
+0:partner_to_reference:target {'2-3': 18, '3-2': 9}
+0:B_to_C:source {'2-3': 18, '3-2': 7}
+0:B_to_C:target {'2-3': 18, '3-2': 6}
+0:D_to_E:source {'2-3': 22, '3-2': 15}
+0:D_to_E:target {'2-3': 24, '3-2': 16}
+1:partner_to_reference:source {'2-3': 16, '3-2': 7}
+1:partner_to_reference:target {'2-3': 16, '3-2': 7}
+1:B_to_C:source {'2-3': 20, '3-2': 9}
+1:B_to_C:target {'2-3': 17, '3-2': 6}
+1:D_to_E:source {'2-3': 25, '3-2': 17}
+1:D_to_E:target {'2-3': 24, '3-2': 16}

@@ -1,0 +1,18 @@
+B to C (preserving): 0 -> 0
+[-1  0]
+[ 0 -1]
+Extends to link
+D to E (reversing): 0 -> 0
+[1  0]
+[0 -1]
+Extends to link
+A splits as trefoil and partner, with signatures +2 and -4.
+Partner to B(245,104) (reversing): 0 -> 0
+[-1 0]
+[ 0 1]
+Extends to link
+Partner to K14a7385 (reversing): 0 -> 0
+[-1 0]
+[ 0 1]
+Extends to link
+F simplifies to a crossing-free unknot.

@@ -1,0 +1,10 @@
+parity 0: trefoil signature 2, endpoint unlink of 2 components
+  partner_to_reference: axis 1 -> 1, maps [[[-1, 0], [0, 1]], [[1, 0], [0, -1]]]
+  B_to_C: axis 0 -> 0, maps [[[1, 0], [0, 1]], [[-1, 0], [0, -1]]]
+  D_to_E: axis 0 -> 1, maps [[[-1, 0], [0, 1]], [[-1, 0], [0, 1]]]
+parity 1: trefoil signature 2, endpoint unlink of 2 components
+  partner_to_reference: axis 0 -> 1, maps [[[-1, 0], [0, 1]], [[1, 0], [0, -1]]]
+  B_to_C: axis 1 -> 1, maps [[[-1, 0], [0, -1]], [[1, 0], [0, 1]]]
+  D_to_E: axis 1 -> 1, maps [[[-1, 0], [0, 1]], [[-1, 0], [0, 1]]]
+Zero-twist partner: meridian-preserving identification with 10_6 verified
+14a7385: trefoil signature 2, partner signature -4, three ordinary changes verified

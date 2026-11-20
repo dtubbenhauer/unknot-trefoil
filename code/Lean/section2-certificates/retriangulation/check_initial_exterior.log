@@ -1,0 +1,12 @@
+0:partner_to_reference:source: 64 tetrahedra, exact incidence and marked peripheral curves
+0:partner_to_reference:target: 64 tetrahedra, exact incidence and marked peripheral curves
+0:B_to_C:source: 84 tetrahedra, exact incidence and marked peripheral curves
+0:B_to_C:target: 84 tetrahedra, exact incidence and marked peripheral curves
+0:D_to_E:source: 84 tetrahedra, exact incidence and marked peripheral curves
+0:D_to_E:target: 72 tetrahedra, exact incidence and marked peripheral curves
+1:partner_to_reference:source: 68 tetrahedra, exact incidence and marked peripheral curves
+1:partner_to_reference:target: 68 tetrahedra, exact incidence and marked peripheral curves
+1:B_to_C:source: 88 tetrahedra, exact incidence and marked peripheral curves
+1:B_to_C:target: 88 tetrahedra, exact incidence and marked peripheral curves
+1:D_to_E:source: 88 tetrahedra, exact incidence and marked peripheral curves
+1:D_to_E:target: 76 tetrahedra, exact incidence and marked peripheral curves

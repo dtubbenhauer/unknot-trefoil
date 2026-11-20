@@ -1,8 +1,8 @@
-# Code and Erratum for *Unknotting the trefoil with a partner*
+# Code and Erratum for *Unknotting number is strictly subadditive for the trefoil*
 
 This repository contains the verification programs and diagram data accompanying the paper
 
-*[Unknotting the trefoil with a partner](paper/trefoil-partners.pdf)*
+*[Unknotting number is strictly subadditive for the trefoil](paper/trefoil-partners.pdf)*
 
 by Anne Dranowski, Yura Kabkov and Daniel Tubbenhauer.
 
@@ -93,7 +93,7 @@ The suggested citation is given below.
 ```bibtex
 @misc{DranowskiKabkovTubbenhauer2026Trefoil,
   author = {Dranowski, Anne and Kabkov, Yura and Tubbenhauer, Daniel},
-  title = {Code and more for the paper {Unknotting the trefoil with a partner}},
+  title = {Code and more for the paper {Unknotting number is strictly subadditive for the trefoil}},
   year = {2026},
   url = {https://github.com/dtubbenhauer/unknot-trefoil}
 }

@@ -75,6 +75,19 @@ python code/verify_trefoil_lower.py
 
 The program uses exact rational arithmetic to check the correction-term obstruction for the determinant-245 partner. The expected result is that all five candidate Owens forms are obstructed. [Section 3B of the Markdown paper](ai/paper.md#sub-determinant245)
 
+## Lean verification
+
+The [Lean 4 formalization](code/Lean/README.md) checks the computational certificates and deductions in Sections 2 and 3, **relative to explicitly stated geometric, topological and Heegaard Floer inputs**. The unified lower-bound theorem is `Trefoil.Section3LowerBound.section3_lower_bound`. The external results and the remaining diagram-to-exterior realization obligations are documented rather than silently assumed. [Proof map](code/Lean/proof-map.md) · [Assumptions audit](code/Lean/ASSUMPTIONS.md) · [Verification report](code/Lean/reports/verification.json)
+
+To reproduce the kernel checks with the pinned Lean and Mathlib versions:
+
+```sh
+cd code/Lean
+bash verify_lean.sh --get-cache --clean
+```
+
+The [Lean README](code/Lean/README.md) contains the detailed build instructions and links to the theorem and axiom audits. The [GitHub Actions workflow](.github/workflows/lean-section3a-endgame.yml) runs the full verification.
+
 ## Relation to the paper
 
 The geometric verification checks the marked identifications and endpoints for the two parity representatives. Section 2 of the paper uses the peripheral maps to extend the sequence through the full-twist fillings. Section 3 proves the lower bound with a uniform lattice argument and the separate correction-term calculation for the first partner. [Theorem index](ai/theorem-index.json)

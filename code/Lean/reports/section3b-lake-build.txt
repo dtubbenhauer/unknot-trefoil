@@ -1,0 +1,161 @@
+✔ [1395/1399] Built Trefoil.Section3BMinimum
+✔ [1396/1399] Built Trefoil.Section3BTopology
+✔ [1397/1399] Built Trefoil.Section3LowerBound
+ℹ [1398/1399] Built SECTION3B_Reference_Audit
+info: SECTION3B_Reference_Audit.lean:26:0: structure Trefoil.Section3BTopology.FloerReferences (T : Trefoil.Section3ATopology.Geometry) : Type
+number of parameters: 1
+fields:
+  Trefoil.Section3BTopology.FloerReferences.alternating : T.Knot → Prop
+  Trefoil.Section3BTopology.FloerReferences.twoBridge_alternating : ∀ (p q : ℕ),
+      Odd p → 0 < q → q < p → p.Coprime q → self.alternating (T.twoBridge p q)
+  Trefoil.Section3BTopology.FloerReferences.correction : T.Three → (p : ℕ) → ℕ → ZMod p → ℚ
+  Trefoil.Section3BTopology.FloerReferences.rawLensLabel : (p : ℕ) → ℕ → Fin p → ZMod p
+  Trefoil.Section3BTopology.FloerReferences.rawLabel_difference : ∀ (p t : ℕ),
+      Odd p →
+        0 < t → t < p → p.Coprime t → ∀ (i k : Fin p), self.rawLensLabel p t i - self.rawLensLabel p t k = ↑↑i - ↑↑k
+  Trefoil.Section3BTopology.FloerReferences.rawLabel_fixed_conjugation : ∀ (p t : ℕ),
+      Odd p →
+        0 < t →
+          t < p →
+            p.Coprime t →
+              ∀ (i : Fin p), 2 * ↑i % p = (p + t - 1) % p → self.rawLensLabel p t i = -self.rawLensLabel p t i
+  Trefoil.Section3BTopology.FloerReferences.osz_negative_lens : ∀ (p t : ℕ),
+      Odd p →
+        0 < t →
+          t < p →
+            p.Coprime t →
+              ∀ (i : Fin p),
+                self.correction (T.reverse (T.lens p t)) p t (self.rawLensLabel p t i) =
+                  Trefoil.Finite.correctionTerm p t ↑i
+  Trefoil.Section3BTopology.FloerReferences.goeritzMinimum : T.Knot → (p : ℕ) → ℕ → ZMod p → ℚ
+  Trefoil.Section3BTopology.FloerReferences.goeritz_sharp : ∀ (K : T.Knot) (p q : ℕ),
+      self.alternating K →
+        T.doubleCover K = T.lens p q →
+          Odd p →
+            0 < q →
+              q < p →
+                p.Coprime q →
+                  ∀ (j : ZMod p), self.goeritzMinimum K p (p - q) j = self.correction (T.doubleCover K) p (p - q) j
+  Trefoil.Section3BTopology.FloerReferences.owens_alternating : ∀ (K : T.Knot) (p q : ℕ),
+      self.alternating K →
+        T.signature K = 4 →
+          T.crossingChanges K 0 2 →
+            T.doubleCover K = T.lens p q →
+              Odd p →
+                0 < q →
+                  q < p →
+                    p.Coprime q →
+                      ∃ h a s,
+                        0 ≤ a ∧
+                          a < h ∧
+                            h ≤ s ∧
+                              Even h ∧
+                                Even s ∧
+                                  (Trefoil.Section3BMinimum.surgeryMatrixZ h a s).det = ↑p ∧
+                                    Nonempty
+                                      (Trefoil.Section3BMinimum.OwensMinimum p h a s (self.goeritzMinimum K p (p - q)))
+constructor:
+  Trefoil.Section3BTopology.FloerReferences.mk {T : Trefoil.Section3ATopology.Geometry} (alternating : T.Knot → Prop)
+    (twoBridge_alternating : ∀ (p q : ℕ), Odd p → 0 < q → q < p → p.Coprime q → alternating (T.twoBridge p q))
+    (correction : T.Three → (p : ℕ) → ℕ → ZMod p → ℚ) (rawLensLabel : (p : ℕ) → ℕ → Fin p → ZMod p)
+    (rawLabel_difference :
+      ∀ (p t : ℕ),
+        Odd p → 0 < t → t < p → p.Coprime t → ∀ (i k : Fin p), rawLensLabel p t i - rawLensLabel p t k = ↑↑i - ↑↑k)
+    (rawLabel_fixed_conjugation :
+      ∀ (p t : ℕ),
+        Odd p →
+          0 < t →
+            t < p →
+              p.Coprime t → ∀ (i : Fin p), 2 * ↑i % p = (p + t - 1) % p → rawLensLabel p t i = -rawLensLabel p t i)
+    (osz_negative_lens :
+      ∀ (p t : ℕ),
+        Odd p →
+          0 < t →
+            t < p →
+              p.Coprime t →
+                ∀ (i : Fin p),
+                  correction (T.reverse (T.lens p t)) p t (rawLensLabel p t i) = Trefoil.Finite.correctionTerm p t ↑i)
+    (goeritzMinimum : T.Knot → (p : ℕ) → ℕ → ZMod p → ℚ)
+    (goeritz_sharp :
+      ∀ (K : T.Knot) (p q : ℕ),
+        alternating K →
+          T.doubleCover K = T.lens p q →
+            Odd p →
+              0 < q →
+                q < p →
+                  p.Coprime q → ∀ (j : ZMod p), goeritzMinimum K p (p - q) j = correction (T.doubleCover K) p (p - q) j)
+    (owens_alternating :
+      ∀ (K : T.Knot) (p q : ℕ),
+        alternating K →
+          T.signature K = 4 →
+            T.crossingChanges K 0 2 →
+              T.doubleCover K = T.lens p q →
+                Odd p →
+                  0 < q →
+                    q < p →
+                      p.Coprime q →
+                        ∃ h a s,
+                          0 ≤ a ∧
+                            a < h ∧
+                              h ≤ s ∧
+                                Even h ∧
+                                  Even s ∧
+                                    (Trefoil.Section3BMinimum.surgeryMatrixZ h a s).det = ↑p ∧
+                                      Nonempty
+                                        (Trefoil.Section3BMinimum.OwensMinimum p h a s (goeritzMinimum K p (p - q)))) :
+    Trefoil.Section3BTopology.FloerReferences T
+info: SECTION3B_Reference_Audit.lean:27:0: structure Trefoil.Section3BMinimum.OwensMinimum (delta : ℕ) (h a s : ℤ) (d : ZMod delta → ℚ) : Type
+number of parameters: 5
+fields:
+  Trefoil.Section3BMinimum.OwensMinimum.classIso : Trefoil.Section3BMinimum.SurgeryCokernel h a s ≃+ ZMod delta
+  Trefoil.Section3BMinimum.OwensMinimum.minimum : ZMod delta → ℚ
+  Trefoil.Section3BMinimum.OwensMinimum.attained : ∀ (x : Trefoil.Finite.ZVector) (z : Trefoil.Finite.QVector),
+      ((Trefoil.Finite.surgeryMatrix h a s).mulVec z = fun i => ↑(x i)) →
+        ∃ y,
+          (Trefoil.Finite.quadraticBound (Trefoil.Section3BMinimum.surgeryTranslate h a s x y) fun i => z i + ↑(y i)) =
+            self.minimum (self.classIso ((Trefoil.Section3BMinimum.cokernelClass h a s) x))
+  Trefoil.Section3BMinimum.OwensMinimum.minimizing : ∀ (x : Trefoil.Finite.ZVector) (z : Trefoil.Finite.QVector),
+      ((Trefoil.Finite.surgeryMatrix h a s).mulVec z = fun i => ↑(x i)) →
+        self.minimum (self.classIso ((Trefoil.Section3BMinimum.cokernelClass h a s) x)) ≤
+          Trefoil.Finite.quadraticBound x z
+  Trefoil.Section3BMinimum.OwensMinimum.floerComparison : ∀ (j : ZMod delta), ∃ n, self.minimum j - d j = 2 * ↑n
+constructor:
+  Trefoil.Section3BMinimum.OwensMinimum.mk {delta : ℕ} {h a s : ℤ} {d : ZMod delta → ℚ}
+    (classIso : Trefoil.Section3BMinimum.SurgeryCokernel h a s ≃+ ZMod delta) (minimum : ZMod delta → ℚ)
+    (attained :
+      ∀ (x : Trefoil.Finite.ZVector) (z : Trefoil.Finite.QVector),
+        ((Trefoil.Finite.surgeryMatrix h a s).mulVec z = fun i => ↑(x i)) →
+          ∃ y,
+            (Trefoil.Finite.quadraticBound (Trefoil.Section3BMinimum.surgeryTranslate h a s x y) fun i =>
+                z i + ↑(y i)) =
+              minimum (classIso ((Trefoil.Section3BMinimum.cokernelClass h a s) x)))
+    (minimizing :
+      ∀ (x : Trefoil.Finite.ZVector) (z : Trefoil.Finite.QVector),
+        ((Trefoil.Finite.surgeryMatrix h a s).mulVec z = fun i => ↑(x i)) →
+          minimum (classIso ((Trefoil.Section3BMinimum.cokernelClass h a s) x)) ≤ Trefoil.Finite.quadraticBound x z)
+    (floerComparison : ∀ (j : ZMod delta), ∃ n, minimum j - d j = 2 * ↑n) :
+    Trefoil.Section3BMinimum.OwensMinimum delta h a s d
+info: SECTION3B_Reference_Audit.lean:28:0: def Trefoil.Section3BMinimum.ReducedAt : ℕ → ℤ → ℤ → ℤ → Prop :=
+fun delta h a s => 0 ≤ a ∧ a < h ∧ h ≤ s ∧ h % 2 = 0 ∧ s % 2 = 0 ∧ (2 * h - 1) * (2 * s - 1) - 4 * a ^ 2 = ↑delta
+info: SECTION3B_Reference_Audit.lean:29:0: def Trefoil.Section3BMinimum.spinBase : ℕ → ℕ → ℕ :=
+fun p q => (p + (p - q) - 1) * ((p + 1) / 2) % p
+info: SECTION3B_Reference_Audit.lean:30:0: def Trefoil.Section3BMinimum.lensCorrection : (p : ℕ) → ℕ → ZMod p → ℚ :=
+fun p q j => Trefoil.Finite.correctionTerm p (p - q) ((Trefoil.Section3BMinimum.spinBase p q + j.val) % p)
+info: SECTION3B_Reference_Audit.lean:31:0: 'Trefoil.Section3BMinimum.spinBase_245' does not depend on any axioms
+info: SECTION3B_Reference_Audit.lean:32:0: 'Trefoil.Section3BMinimum.lensCorrection_245' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SECTION3B_Reference_Audit.lean:33:0: 'Trefoil.Section3BMinimum.finiteLabel_double' depends on axioms: [propext, Quot.sound]
+info: SECTION3B_Reference_Audit.lean:34:0: 'Trefoil.Section3BMinimum.surgeryMatrixZ_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SECTION3B_Reference_Audit.lean:35:0: 'Trefoil.Section3BMinimum.quadraticBound_translate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SECTION3B_Reference_Audit.lean:36:0: 'Trefoil.Section3BMinimum.quadraticBound_translate_even' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SECTION3B_Reference_Audit.lean:37:0: 'Trefoil.Section3BMinimum.characteristic_iff_twice' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SECTION3B_Reference_Audit.lean:38:0: 'Trefoil.Section3BMinimum.doubled_characteristic_value' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SECTION3B_Reference_Audit.lean:39:0: 'Trefoil.Section3BMinimum.doubleClassesEquiv' depends on axioms: [propext, Quot.sound]
+info: SECTION3B_Reference_Audit.lean:40:0: 'Trefoil.Section3BMinimum.OwensMinimum.changeCorrection' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SECTION3B_Reference_Audit.lean:41:0: 'Trefoil.Section3BMinimum.minimum_to_comparison' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SECTION3B_Reference_Audit.lean:42:0: 'Trefoil.Section3BMinimum.no_owens_minimum_245' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SECTION3B_Reference_Audit.lean:43:0: 'Trefoil.Section3BTopology.raw_spin_245' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SECTION3B_Reference_Audit.lean:44:0: 'Trefoil.Section3BTopology.oriented_correction_245' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SECTION3B_Reference_Audit.lean:45:0: 'Trefoil.Section3BTopology.section3B_oriented_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SECTION3B_Reference_Audit.lean:46:0: 'Trefoil.Section3BTopology.section3B_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SECTION3B_Reference_Audit.lean:56:0: 'Trefoil.Section3LowerBound.section3_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully.

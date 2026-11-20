@@ -1,0 +1,41 @@
+{
+  "status": "independent_arithmetic_passed",
+  "correction_terms_exactly_checked": 245,
+  "candidate_forms": [
+    [
+      2,
+      1,
+      42
+    ],
+    [
+      4,
+      0,
+      18
+    ],
+    [
+      8,
+      5,
+      12
+    ],
+    [
+      14,
+      11,
+      14
+    ],
+    [
+      62,
+      61,
+      62
+    ]
+  ],
+  "spin_conventions_checked": 12882,
+  "quadratic_class_parity_checks": 3750,
+  "obstruction_cases_checked": 5,
+  "new_lean_files": [
+    "Trefoil/Section3BMinimum.lean",
+    "Trefoil/Section3BTopology.lean",
+    "Trefoil/Section3LowerBound.lean",
+    "SECTION3B_Reference_Audit.lean"
+  ],
+  "provenance": "This arithmetic check runs independently of the Lean build."
+}

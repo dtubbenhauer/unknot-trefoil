@@ -1,0 +1,450 @@
+structure Trefoil.Section3ATopology.Geometry : Type 1
+number of parameters: 0
+fields:
+  Trefoil.Section3ATopology.Geometry.Knot : Type
+  Trefoil.Section3ATopology.Geometry.Three : Type
+  Trefoil.Section3ATopology.Geometry.Four : Type
+  Trefoil.Section3ATopology.Geometry.conway : List ℤ → self.Knot
+  Trefoil.Section3ATopology.Geometry.twoBridge : ℕ → ℕ → self.Knot
+  Trefoil.Section3ATopology.Geometry.mirror : self.Knot → self.Knot
+  Trefoil.Section3ATopology.Geometry.unknotting : self.Knot → ℕ
+  Trefoil.Section3ATopology.Geometry.signature : self.Knot → ℤ
+  Trefoil.Section3ATopology.Geometry.crossingChanges : self.Knot → ℕ → ℕ → Prop
+  Trefoil.Section3ATopology.Geometry.doubleCover : self.Knot → self.Three
+  Trefoil.Section3ATopology.Geometry.lens : ℕ → ℕ → self.Three
+  Trefoil.Section3ATopology.Geometry.reverse : self.Three → self.Three
+  Trefoil.Section3ATopology.Geometry.boundary : self.Four → self.Three
+  Trefoil.Section3ATopology.Geometry.closed : self.Four → Prop
+  Trefoil.Section3ATopology.Geometry.simplyConnected : self.Four → Prop
+  Trefoil.Section3ATopology.Geometry.nonemptyPathConnected : self.Three → Prop
+  Trefoil.Section3ATopology.Geometry.H1BoundaryZ : self.Three → Trefoil.Section3ATopology.Homology ℤ
+  Trefoil.Section3ATopology.Geometry.H2BoundaryZ : self.Three → Trefoil.Section3ATopology.Homology ℤ
+  Trefoil.Section3ATopology.Geometry.H1BoundaryF2 : self.Three →
+      Trefoil.Section3ATopology.Homology Trefoil.Section3ATopology.F₂
+  Trefoil.Section3ATopology.Geometry.H2BoundaryF2 : self.Three →
+      Trefoil.Section3ATopology.Homology Trefoil.Section3ATopology.F₂
+  Trefoil.Section3ATopology.Geometry.H2Z : self.Four → Trefoil.Section3ATopology.Homology ℤ
+  Trefoil.Section3ATopology.Geometry.H2F2 : self.Four → Trefoil.Section3ATopology.Homology Trefoil.Section3ATopology.F₂
+  Trefoil.Section3ATopology.Geometry.intersection : (X : self.Four) →
+      (self.H2Z X).carrier →ₗ[ℤ] (self.H2Z X).carrier →ₗ[ℤ] ℤ
+  Trefoil.Section3ATopology.Geometry.reduce : (X : self.Four) → (self.H2Z X).carrier →+ (self.H2F2 X).carrier
+constructor:
+  Trefoil.Section3ATopology.Geometry.mk (Knot Three Four : Type) (conway : List ℤ → Knot) (twoBridge : ℕ → ℕ → Knot)
+    (mirror : Knot → Knot) (unknotting : Knot → ℕ) (signature : Knot → ℤ) (crossingChanges : Knot → ℕ → ℕ → Prop)
+    (doubleCover : Knot → Three) (lens : ℕ → ℕ → Three) (reverse : Three → Three) (boundary : Four → Three)
+    (closed simplyConnected : Four → Prop) (nonemptyPathConnected : Three → Prop)
+    (H1BoundaryZ H2BoundaryZ : Three → Trefoil.Section3ATopology.Homology ℤ)
+    (H1BoundaryF2 H2BoundaryF2 : Three → Trefoil.Section3ATopology.Homology Trefoil.Section3ATopology.F₂)
+    (H2Z : Four → Trefoil.Section3ATopology.Homology ℤ)
+    (H2F2 : Four → Trefoil.Section3ATopology.Homology Trefoil.Section3ATopology.F₂)
+    (intersection : (X : Four) → (H2Z X).carrier →ₗ[ℤ] (H2Z X).carrier →ₗ[ℤ] ℤ)
+    (reduce : (X : Four) → (H2Z X).carrier →+ (H2F2 X).carrier) : Trefoil.Section3ATopology.Geometry
+structure Trefoil.Section3ATopology.Handlebody (T : Trefoil.Section3ATopology.Geometry) (n : ℕ) : Type
+number of parameters: 2
+fields:
+  Trefoil.Section3ATopology.Handlebody.X : T.Four
+  Trefoil.Section3ATopology.Handlebody.simplyConnected : T.simplyConnected self.X
+  Trefoil.Section3ATopology.Handlebody.coordinates : (T.H2Z self.X).carrier ≃ₗ[ℤ] Fin n → ℤ
+constructor:
+  Trefoil.Section3ATopology.Handlebody.mk {T : Trefoil.Section3ATopology.Geometry} {n : ℕ} (X : T.Four)
+    (simplyConnected : T.simplyConnected X) (coordinates : (T.H2Z X).carrier ≃ₗ[ℤ] Fin n → ℤ) :
+    Trefoil.Section3ATopology.Handlebody T n
+structure Trefoil.Section3ATopology.Gluing (T : Trefoil.Section3ATopology.Geometry) (G W : T.Four) : Type
+number of parameters: 3
+fields:
+  Trefoil.Section3ATopology.Gluing.X : T.Four
+  Trefoil.Section3ATopology.Gluing.inclZ : (T.H2Z G).carrier × (T.H2Z W).carrier →ₗ[ℤ] (T.H2Z self.X).carrier
+  Trefoil.Section3ATopology.Gluing.inclF2 : (T.H2F2 G).carrier × (T.H2F2 W).carrier →ₗ[Trefoil.Section3ATopology.F₂]
+      (T.H2F2 self.X).carrier
+  Trefoil.Section3ATopology.Gluing.fromBoundaryF2 : (T.H2BoundaryF2
+          (T.boundary W)).carrier →ₗ[Trefoil.Section3ATopology.F₂]
+      (T.H2F2 G).carrier × (T.H2F2 W).carrier
+  Trefoil.Section3ATopology.Gluing.toBoundaryF2 : (T.H2F2 self.X).carrier →ₗ[Trefoil.Section3ATopology.F₂]
+      (T.H1BoundaryF2 (T.boundary W)).carrier
+  Trefoil.Section3ATopology.Gluing.fromBoundaryZ : (T.H2BoundaryZ (T.boundary W)).carrier →ₗ[ℤ]
+      (T.H2Z G).carrier × (T.H2Z W).carrier
+  Trefoil.Section3ATopology.Gluing.toBoundaryZ : (T.H2Z self.X).carrier →ₗ[ℤ] (T.H1BoundaryZ (T.boundary W)).carrier
+constructor:
+  Trefoil.Section3ATopology.Gluing.mk {T : Trefoil.Section3ATopology.Geometry} {G W : T.Four} (X : T.Four)
+    (inclZ : (T.H2Z G).carrier × (T.H2Z W).carrier →ₗ[ℤ] (T.H2Z X).carrier)
+    (inclF2 : (T.H2F2 G).carrier × (T.H2F2 W).carrier →ₗ[Trefoil.Section3ATopology.F₂] (T.H2F2 X).carrier)
+    (fromBoundaryF2 :
+      (T.H2BoundaryF2 (T.boundary W)).carrier →ₗ[Trefoil.Section3ATopology.F₂] (T.H2F2 G).carrier × (T.H2F2 W).carrier)
+    (toBoundaryF2 : (T.H2F2 X).carrier →ₗ[Trefoil.Section3ATopology.F₂] (T.H1BoundaryF2 (T.boundary W)).carrier)
+    (fromBoundaryZ : (T.H2BoundaryZ (T.boundary W)).carrier →ₗ[ℤ] (T.H2Z G).carrier × (T.H2Z W).carrier)
+    (toBoundaryZ : (T.H2Z X).carrier →ₗ[ℤ] (T.H1BoundaryZ (T.boundary W)).carrier) :
+    Trefoil.Section3ATopology.Gluing T G W
+structure Trefoil.Section3ATopology.References (T : Trefoil.Section3ATopology.Geometry) : Type
+number of parameters: 1
+fields:
+  Trefoil.Section3ATopology.References.sig : Trefoil.Section3ASignature.SignatureReferences T.twoBridge T.signature
+  Trefoil.Section3ATopology.References.mirror_unknotting : ∀ (K : T.Knot), T.unknotting (T.mirror K) = T.unknotting K
+  Trefoil.Section3ATopology.References.conway_fraction : ∀ (weights : List ℤ) (p q : ℕ),
+      weights ≠ [] →
+        (∀ a ∈ weights, 0 < a) →
+          Trefoil.Arithmetic.plusPair weights = (↑p, ↑q) →
+            Odd p →
+              q < p → p.Coprime q → T.conway weights = T.twoBridge p q ∨ T.mirror (T.conway weights) = T.twoBridge p q
+  Trefoil.Section3ATopology.References.bridge_cover : ∀ (p q : ℕ),
+      Odd p → 0 < q → q < p → p.Coprime q → T.doubleCover (T.twoBridge p q) = T.lens p q
+  Trefoil.Section3ATopology.References.minimal_crossing_changes : ∀ (K : T.Knot),
+      ∃ pos neg, pos + neg = T.unknotting K ∧ T.crossingChanges K pos neg
+  Trefoil.Section3ATopology.References.signature_crossing_bound : ∀ (K : T.Knot) (pos neg : ℕ),
+      T.crossingChanges K pos neg → T.signature K ≤ 2 * ↑neg
+  Trefoil.Section3ATopology.References.owens : ∀ (K : T.Knot) (pos neg : ℕ),
+      T.crossingChanges K pos neg →
+        T.signature K = 2 * ↑neg →
+          ∃ W,
+            T.boundary W.X = T.doubleCover K ∧
+              Trefoil.Section3ATopology.Positive T W.X ∧
+                (Matrix.det fun i j => ((T.intersection W.X) (W.handle i)) (W.handle j)) =
+                    ↑(Nat.card (T.H1BoundaryZ (T.doubleCover K)).carrier) ∧
+                  ∀ (i j : Fin (pos + neg)),
+                    ((T.intersection W.X) (W.handle (Trefoil.Section3ATopology.meridian i)))
+                        (W.handle (Trefoil.Section3ATopology.meridian j)) =
+                      if i = j then 2 else 0
+  Trefoil.Section3ATopology.References.chain_plumbing : ∀ (weights : List ℤ) (p q : ℕ),
+      Trefoil.Arithmetic.minusPair weights = (↑p, ↑q) →
+        0 < q →
+          q < p →
+            p.Coprime q →
+              ∃ G,
+                T.boundary G.X = T.lens p q ∧
+                  ∀ (i j : Fin weights.length),
+                    ((T.intersection G.X) (G.handle i)) (G.handle j) = Trefoil.Section3APlumbing.chainGram weights i j
+  Trefoil.Section3ATopology.References.lens_reverse : ∀ (p q : ℕ),
+      0 < q → q < p → p.Coprime q → T.lens p (p - q) = T.reverse (T.lens p q)
+  Trefoil.Section3ATopology.References.lens_connected : ∀ (p q : ℕ),
+      0 < q → q < p → p.Coprime q → T.nonemptyPathConnected (T.lens p q)
+  Trefoil.Section3ATopology.References.lens_h1_Z : ∀ (p q : ℕ),
+      0 < q → q < p → p.Coprime q → Nonempty ((T.H1BoundaryZ (T.lens p q)).carrier ≃ₗ[ℤ] ZMod p)
+  Trefoil.Section3ATopology.References.lens_h2_Z : ∀ (p q : ℕ),
+      0 < q → q < p → p.Coprime q → Subsingleton (T.H2BoundaryZ (T.lens p q)).carrier
+  Trefoil.Section3ATopology.References.lens_h1_F2 : ∀ (p q : ℕ),
+      0 < q →
+        q < p →
+          p.Coprime q →
+            Nonempty
+              ((T.H1BoundaryF2 (T.lens p q)).carrier ≃ₗ[Trefoil.Section3ATopology.F₂]
+                Trefoil.Section3ATopology.F₂ ⧸ LinearMap.range (Trefoil.Section3ATopology.lensD2 p))
+  Trefoil.Section3ATopology.References.lens_h2_F2 : ∀ (p q : ℕ),
+      0 < q →
+        q < p →
+          p.Coprime q →
+            Nonempty
+              ((T.H2BoundaryF2 (T.lens p q)).carrier ≃ₗ[Trefoil.Section3ATopology.F₂]
+                ↥(LinearMap.ker (Trefoil.Section3ATopology.lensD2 p)))
+  Trefoil.Section3ATopology.References.glue : (G W : T.Four) →
+      T.boundary G = T.reverse (T.boundary W) → Trefoil.Section3ATopology.Gluing T G W
+  Trefoil.Section3ATopology.References.glued_closed : ∀ (G W : T.Four) (h : T.boundary G = T.reverse (T.boundary W)),
+      T.closed (self.glue G W h).X
+  Trefoil.Section3ATopology.References.glued_simplyConnected : ∀ (G W : T.Four)
+      (h : T.boundary G = T.reverse (T.boundary W)),
+      T.nonemptyPathConnected (T.boundary W) →
+        T.simplyConnected G → T.simplyConnected W → T.simplyConnected (self.glue G W h).X
+  Trefoil.Section3ATopology.References.glued_intersection : ∀ (G W : T.Four)
+      (h : T.boundary G = T.reverse (T.boundary W)) (x y : (T.H2Z G).carrier × (T.H2Z W).carrier),
+      ((T.intersection (self.glue G W h).X) ((self.glue G W h).inclZ x)) ((self.glue G W h).inclZ y) =
+        ((T.intersection G) x.1) y.1 + ((T.intersection W) x.2) y.2
+  Trefoil.Section3ATopology.References.mv_Z_pieces : ∀ (G W : T.Four) (h : T.boundary G = T.reverse (T.boundary W))
+      (z : (T.H2Z G).carrier × (T.H2Z W).carrier),
+      (self.glue G W h).inclZ z = 0 ↔ ∃ y, (self.glue G W h).fromBoundaryZ y = z
+  Trefoil.Section3ATopology.References.mv_Z_surjective : ∀ (G W : T.Four) (h : T.boundary G = T.reverse (T.boundary W)),
+      T.simplyConnected G → T.simplyConnected W → Function.Surjective ⇑(self.glue G W h).toBoundaryZ
+  Trefoil.Section3ATopology.References.mv_Z : ∀ (G W : T.Four) (h : T.boundary G = T.reverse (T.boundary W))
+      (x : (T.H2Z (self.glue G W h).X).carrier),
+      (self.glue G W h).toBoundaryZ x = 0 ↔ ∃ z, (self.glue G W h).inclZ z = x
+  Trefoil.Section3ATopology.References.mv_F2_pieces : ∀ (G W : T.Four) (h : T.boundary G = T.reverse (T.boundary W))
+      (z : (T.H2F2 G).carrier × (T.H2F2 W).carrier),
+      (self.glue G W h).inclF2 z = 0 ↔ ∃ y, (self.glue G W h).fromBoundaryF2 y = z
+  Trefoil.Section3ATopology.References.mv_F2_closed : ∀ (G W : T.Four) (h : T.boundary G = T.reverse (T.boundary W))
+      (x : (T.H2F2 (self.glue G W h).X).carrier),
+      (self.glue G W h).toBoundaryF2 x = 0 ↔ ∃ z, (self.glue G W h).inclF2 z = x
+  Trefoil.Section3ATopology.References.closed_h2_torsionFree : ∀ (X : T.Four),
+      T.closed X → T.simplyConnected X → ∀ (k : ℤ) (x : (T.H2Z X).carrier), k ≠ 0 → k • x = 0 → x = 0
+  Trefoil.Section3ATopology.References.uct_surjective : ∀ (X : T.Four),
+      T.simplyConnected X → Function.Surjective ⇑(T.reduce X)
+  Trefoil.Section3ATopology.References.uct_kernel : ∀ (X : T.Four),
+      T.simplyConnected X → ∀ (x : (T.H2Z X).carrier), (T.reduce X) x = 0 ↔ ∃ y, x = y + y
+  Trefoil.Section3ATopology.References.coefficient_naturality : ∀ (G W : T.Four)
+      (h : T.boundary G = T.reverse (T.boundary W)) (x : (T.H2Z G).carrier × (T.H2Z W).carrier),
+      (T.reduce (self.glue G W h).X) ((self.glue G W h).inclZ x) =
+        (self.glue G W h).inclF2 ((T.reduce G) x.1, (T.reduce W) x.2)
+  Trefoil.Section3ATopology.References.donaldson : ∀ (X : T.Four),
+      T.closed X →
+        T.simplyConnected X →
+          Trefoil.Section3ATopology.Positive T X →
+            ∃ n e, ∀ (x y : (T.H2Z X).carrier), Trefoil.LatticeSupports.dot (e x) (e y) = ((T.intersection X) x) y
+constructor:
+  Trefoil.Section3ATopology.References.mk {T : Trefoil.Section3ATopology.Geometry}
+    (sig : Trefoil.Section3ASignature.SignatureReferences T.twoBridge T.signature)
+    (mirror_unknotting : ∀ (K : T.Knot), T.unknotting (T.mirror K) = T.unknotting K)
+    (conway_fraction :
+      ∀ (weights : List ℤ) (p q : ℕ),
+        weights ≠ [] →
+          (∀ a ∈ weights, 0 < a) →
+            Trefoil.Arithmetic.plusPair weights = (↑p, ↑q) →
+              Odd p →
+                q < p →
+                  p.Coprime q → T.conway weights = T.twoBridge p q ∨ T.mirror (T.conway weights) = T.twoBridge p q)
+    (bridge_cover : ∀ (p q : ℕ), Odd p → 0 < q → q < p → p.Coprime q → T.doubleCover (T.twoBridge p q) = T.lens p q)
+    (minimal_crossing_changes : ∀ (K : T.Knot), ∃ pos neg, pos + neg = T.unknotting K ∧ T.crossingChanges K pos neg)
+    (signature_crossing_bound : ∀ (K : T.Knot) (pos neg : ℕ), T.crossingChanges K pos neg → T.signature K ≤ 2 * ↑neg)
+    (owens :
+      ∀ (K : T.Knot) (pos neg : ℕ),
+        T.crossingChanges K pos neg →
+          T.signature K = 2 * ↑neg →
+            ∃ W,
+              T.boundary W.X = T.doubleCover K ∧
+                Trefoil.Section3ATopology.Positive T W.X ∧
+                  (Matrix.det fun i j => ((T.intersection W.X) (W.handle i)) (W.handle j)) =
+                      ↑(Nat.card (T.H1BoundaryZ (T.doubleCover K)).carrier) ∧
+                    ∀ (i j : Fin (pos + neg)),
+                      ((T.intersection W.X) (W.handle (Trefoil.Section3ATopology.meridian i)))
+                          (W.handle (Trefoil.Section3ATopology.meridian j)) =
+                        if i = j then 2 else 0)
+    (chain_plumbing :
+      ∀ (weights : List ℤ) (p q : ℕ),
+        Trefoil.Arithmetic.minusPair weights = (↑p, ↑q) →
+          0 < q →
+            q < p →
+              p.Coprime q →
+                ∃ G,
+                  T.boundary G.X = T.lens p q ∧
+                    ∀ (i j : Fin weights.length),
+                      ((T.intersection G.X) (G.handle i)) (G.handle j) =
+                        Trefoil.Section3APlumbing.chainGram weights i j)
+    (lens_reverse : ∀ (p q : ℕ), 0 < q → q < p → p.Coprime q → T.lens p (p - q) = T.reverse (T.lens p q))
+    (lens_connected : ∀ (p q : ℕ), 0 < q → q < p → p.Coprime q → T.nonemptyPathConnected (T.lens p q))
+    (lens_h1_Z :
+      ∀ (p q : ℕ), 0 < q → q < p → p.Coprime q → Nonempty ((T.H1BoundaryZ (T.lens p q)).carrier ≃ₗ[ℤ] ZMod p))
+    (lens_h2_Z : ∀ (p q : ℕ), 0 < q → q < p → p.Coprime q → Subsingleton (T.H2BoundaryZ (T.lens p q)).carrier)
+    (lens_h1_F2 :
+      ∀ (p q : ℕ),
+        0 < q →
+          q < p →
+            p.Coprime q →
+              Nonempty
+                ((T.H1BoundaryF2 (T.lens p q)).carrier ≃ₗ[Trefoil.Section3ATopology.F₂]
+                  Trefoil.Section3ATopology.F₂ ⧸ LinearMap.range (Trefoil.Section3ATopology.lensD2 p)))
+    (lens_h2_F2 :
+      ∀ (p q : ℕ),
+        0 < q →
+          q < p →
+            p.Coprime q →
+              Nonempty
+                ((T.H2BoundaryF2 (T.lens p q)).carrier ≃ₗ[Trefoil.Section3ATopology.F₂]
+                  ↥(LinearMap.ker (Trefoil.Section3ATopology.lensD2 p))))
+    (glue : (G W : T.Four) → T.boundary G = T.reverse (T.boundary W) → Trefoil.Section3ATopology.Gluing T G W)
+    (glued_closed : ∀ (G W : T.Four) (h : T.boundary G = T.reverse (T.boundary W)), T.closed (glue G W h).X)
+    (glued_simplyConnected :
+      ∀ (G W : T.Four) (h : T.boundary G = T.reverse (T.boundary W)),
+        T.nonemptyPathConnected (T.boundary W) →
+          T.simplyConnected G → T.simplyConnected W → T.simplyConnected (glue G W h).X)
+    (glued_intersection :
+      ∀ (G W : T.Four) (h : T.boundary G = T.reverse (T.boundary W)) (x y : (T.H2Z G).carrier × (T.H2Z W).carrier),
+        ((T.intersection (glue G W h).X) ((glue G W h).inclZ x)) ((glue G W h).inclZ y) =
+          ((T.intersection G) x.1) y.1 + ((T.intersection W) x.2) y.2)
+    (mv_Z_pieces :
+      ∀ (G W : T.Four) (h : T.boundary G = T.reverse (T.boundary W)) (z : (T.H2Z G).carrier × (T.H2Z W).carrier),
+        (glue G W h).inclZ z = 0 ↔ ∃ y, (glue G W h).fromBoundaryZ y = z)
+    (mv_Z_surjective :
+      ∀ (G W : T.Four) (h : T.boundary G = T.reverse (T.boundary W)),
+        T.simplyConnected G → T.simplyConnected W → Function.Surjective ⇑(glue G W h).toBoundaryZ)
+    (mv_Z :
+      ∀ (G W : T.Four) (h : T.boundary G = T.reverse (T.boundary W)) (x : (T.H2Z (glue G W h).X).carrier),
+        (glue G W h).toBoundaryZ x = 0 ↔ ∃ z, (glue G W h).inclZ z = x)
+    (mv_F2_pieces :
+      ∀ (G W : T.Four) (h : T.boundary G = T.reverse (T.boundary W)) (z : (T.H2F2 G).carrier × (T.H2F2 W).carrier),
+        (glue G W h).inclF2 z = 0 ↔ ∃ y, (glue G W h).fromBoundaryF2 y = z)
+    (mv_F2_closed :
+      ∀ (G W : T.Four) (h : T.boundary G = T.reverse (T.boundary W)) (x : (T.H2F2 (glue G W h).X).carrier),
+        (glue G W h).toBoundaryF2 x = 0 ↔ ∃ z, (glue G W h).inclF2 z = x)
+    (closed_h2_torsionFree :
+      ∀ (X : T.Four), T.closed X → T.simplyConnected X → ∀ (k : ℤ) (x : (T.H2Z X).carrier), k ≠ 0 → k • x = 0 → x = 0)
+    (uct_surjective : ∀ (X : T.Four), T.simplyConnected X → Function.Surjective ⇑(T.reduce X))
+    (uct_kernel : ∀ (X : T.Four), T.simplyConnected X → ∀ (x : (T.H2Z X).carrier), (T.reduce X) x = 0 ↔ ∃ y, x = y + y)
+    (coefficient_naturality :
+      ∀ (G W : T.Four) (h : T.boundary G = T.reverse (T.boundary W)) (x : (T.H2Z G).carrier × (T.H2Z W).carrier),
+        (T.reduce (glue G W h).X) ((glue G W h).inclZ x) = (glue G W h).inclF2 ((T.reduce G) x.1, (T.reduce W) x.2))
+    (donaldson :
+      ∀ (X : T.Four),
+        T.closed X →
+          T.simplyConnected X →
+            Trefoil.Section3ATopology.Positive T X →
+              ∃ n e, ∀ (x y : (T.H2Z X).carrier), Trefoil.LatticeSupports.dot (e x) (e y) = ((T.intersection X) x) y) :
+    Trefoil.Section3ATopology.References T
+structure Trefoil.Section3ASignature.SignatureReferences.{u_1} {Knot : Type u_1} (twoBridge : ℕ → ℕ → Knot)
+  (signature : Knot → ℤ) : Type
+number of parameters: 3
+fields:
+  Trefoil.Section3ASignature.SignatureReferences.chainSignature : List ℤ → ℤ
+  Trefoil.Section3ASignature.SignatureReferences.evenPlumbingSignature : ∀ (p q : ℕ) (weights : List ℤ),
+      0 < q →
+        q < p →
+          p.Coprime q →
+            Odd p →
+              (∀ w ∈ weights, Even w) →
+                Trefoil.Section3ASignature.MatchesFraction weights p q →
+                  signature (twoBridge p q) = self.chainSignature weights
+  Trefoil.Section3ASignature.SignatureReferences.chainSignature_eq_signedPivotCount : ∀ (weights : List ℤ),
+      (∀
+          pivot ∈
+            Trefoil.Arithmetic.rightPivots
+              (List.map (fun w => w) do
+                let a ← weights
+                pure ↑a),
+          pivot ≠ 0) →
+        self.chainSignature weights =
+          Trefoil.Arithmetic.signedPivotCount
+            (Trefoil.Arithmetic.rightPivots
+              (List.map (fun w => w) do
+                let a ← weights
+                pure ↑a))
+constructor:
+  Trefoil.Section3ASignature.SignatureReferences.mk.{u_1} {Knot : Type u_1} {twoBridge : ℕ → ℕ → Knot}
+    {signature : Knot → ℤ} (chainSignature : List ℤ → ℤ)
+    (evenPlumbingSignature :
+      ∀ (p q : ℕ) (weights : List ℤ),
+        0 < q →
+          q < p →
+            p.Coprime q →
+              Odd p →
+                (∀ w ∈ weights, Even w) →
+                  Trefoil.Section3ASignature.MatchesFraction weights p q →
+                    signature (twoBridge p q) = chainSignature weights)
+    (chainSignature_eq_signedPivotCount :
+      ∀ (weights : List ℤ),
+        (∀
+            pivot ∈
+              Trefoil.Arithmetic.rightPivots
+                (List.map (fun w => w) do
+                  let a ← weights
+                  pure ↑a),
+            pivot ≠ 0) →
+          chainSignature weights =
+            Trefoil.Arithmetic.signedPivotCount
+              (Trefoil.Arithmetic.rightPivots
+                (List.map (fun w => w) do
+                  let a ← weights
+                  pure ↑a))) :
+    Trefoil.Section3ASignature.SignatureReferences twoBridge signature
+def Trefoil.Section3ATopology.partner : (T : Trefoil.Section3ATopology.Geometry) → ℕ → T.Knot :=
+fun T m => T.conway [↑m, 2, 1, 4, 3, 2]
+def Trefoil.Section3ATopology.orientedPartner : (T : Trefoil.Section3ATopology.Geometry) → ℕ → T.Knot :=
+fun T m => T.twoBridge (104 * m + 37) 104
+'Trefoil.Section3ATopology.section3A_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section3ATopology.section3A_oriented_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section3ATopology.two_negative_changes' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section3ATopology.owens_filling' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section3ATopology.explicit_plumbing' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section3ATopology.lens_F2_vanish' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section3ATopology.mv_F2_bijective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section3ATopology.integral_joint_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section3ATopology.integral_joint_index' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section3ATopology.glue_positive' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section3ATopology.no_two_change_gluing' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section3APlumbing.plumbing_positiveDefinite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section3APlumbing.plumbing_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section3APlumbing.joint_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section3APlumbing.selectedIndex_injective' depends on axioms: [propext, Quot.sound]
+'Trefoil.Section3ACoefficients.reduced_columns_independent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section3ASignature.partner_signature_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.LatticeExtraction.no_embedding' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.RelativeTopology.lens_boundary_scalar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.RelativeTopology.lens_cellular_kernel_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.RelativeTopology.lens_cellular_boundary_surjective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.RelativeTopology.lensTwoCycles_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.RelativeTopology.lensTwoCycles_subsingleton' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.RelativeTopology.canonicalSelectedHandles_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.RelativeTopology.GluingData.inclusion_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.RelativeTopology.GluingData.selected_independent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.RelativeTopology.GluingData.toEmbedding' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.RelativeTopology.no_gluing_data' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.RelativeTopology.CanonicalGluingData.toGluingData' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.RelativeTopology.no_canonical_gluing_data' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.RelativeTopology.ManifoldHomologyData.boundarySubsingleton' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Trefoil.RelativeTopology.ManifoldHomologyData.toCanonical' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.RelativeTopology.no_manifold_homology_data' depends on axioms: [propext, Classical.choice, Quot.sound]
+structure Trefoil.RelativeTopology.ManifoldHomologyData.{u_4, u_5, u_6} (m : ℕ) (Y : Type u_4) (P : Type u_5)
+  (X : Type u_6) [AddCommGroup Y] [AddCommGroup P] [AddCommGroup X] [Module (ZMod 2) Y] [Module (ZMod 2) P]
+  [Module (ZMod 2) X] : Type (max (max u_4 u_5) u_6)
+number of parameters: 10
+fields:
+  Trefoil.RelativeTopology.ManifoldHomologyData.cellularComparison : Y ≃ₗ[ZMod 2]
+      Trefoil.RelativeTopology.lensTwoCycles m
+  Trefoil.RelativeTopology.ManifoldHomologyData.handleBasis : P ≃ₗ[ZMod 2] Trefoil.RelativeTopology.pieceHandleModule m
+  Trefoil.RelativeTopology.ManifoldHomologyData.boundaryMap : Y →ₗ[ZMod 2] P
+  Trefoil.RelativeTopology.ManifoldHomologyData.inclusion : P →ₗ[ZMod 2] X
+  Trefoil.RelativeTopology.ManifoldHomologyData.mvExact : ∀ (z : P), self.inclusion z = 0 → ∃ y, self.boundaryMap y = z
+  Trefoil.RelativeTopology.ManifoldHomologyData.coordinates : X ≃ₗ[ZMod 2] Trefoil.LatticeEmbedding.Ambient m → ZMod 2
+  Trefoil.RelativeTopology.ManifoldHomologyData.root : Trefoil.LatticeEmbedding.RootIndex m →
+      Trefoil.LatticeEmbedding.Vector m
+  Trefoil.RelativeTopology.ManifoldHomologyData.A : Trefoil.LatticeEmbedding.Vector m
+  Trefoil.RelativeTopology.ManifoldHomologyData.Bheavy : Trefoil.LatticeEmbedding.Vector m
+  Trefoil.RelativeTopology.ManifoldHomologyData.C : Trefoil.LatticeEmbedding.Vector m
+  Trefoil.RelativeTopology.ManifoldHomologyData.root_pairing : ∀ (r s : Trefoil.LatticeEmbedding.RootIndex m),
+      Trefoil.LatticeSupports.dot (self.root r) (self.root s) = Trefoil.LatticeEmbedding.rootGram r s
+  Trefoil.RelativeTopology.ManifoldHomologyData.normA : ∑ j, self.A j ^ 2 = 4
+  Trefoil.RelativeTopology.ManifoldHomologyData.normB : ∑ j, self.Bheavy j ^ 2 = 6
+  Trefoil.RelativeTopology.ManifoldHomologyData.normC : ∑ j, self.C j ^ 2 = 3
+  Trefoil.RelativeTopology.ManifoldHomologyData.pairingAB : Trefoil.LatticeSupports.dot self.A self.Bheavy = -1
+  Trefoil.RelativeTopology.ManifoldHomologyData.pairingAC : Trefoil.LatticeSupports.dot self.A self.C = 0
+  Trefoil.RelativeTopology.ManifoldHomologyData.pairingBC : Trefoil.LatticeSupports.dot self.Bheavy self.C = 0
+  Trefoil.RelativeTopology.ManifoldHomologyData.pairingA_root : ∀ (r : Trefoil.LatticeEmbedding.RootIndex m),
+      Trefoil.LatticeSupports.dot self.A (self.root r) = Trefoil.LatticeEmbedding.aRootPairing r
+  Trefoil.RelativeTopology.ManifoldHomologyData.pairingB_root : ∀ (r : Trefoil.LatticeEmbedding.RootIndex m),
+      Trefoil.LatticeSupports.dot self.Bheavy (self.root r) = Trefoil.LatticeEmbedding.bRootPairing r
+  Trefoil.RelativeTopology.ManifoldHomologyData.pairingC_root : ∀ (r : Trefoil.LatticeEmbedding.RootIndex m),
+      Trefoil.LatticeSupports.dot self.C (self.root r) = Trefoil.LatticeEmbedding.cRootPairing r
+  Trefoil.RelativeTopology.ManifoldHomologyData.naturality : ∀ (r : Option (Trefoil.LatticeEmbedding.RootIndex m))
+      (j : Trefoil.LatticeEmbedding.Ambient m),
+      self.coordinates
+          (self.inclusion
+            (self.handleBasis.symm ((Trefoil.RelativeTopology.canonicalSelectedHandles m) (Finsupp.single r 1))))
+          j =
+        match r with
+        | none => ↑(self.Bheavy j)
+        | some i => ↑(self.root i j)
+constructor:
+  Trefoil.RelativeTopology.ManifoldHomologyData.mk.{u_4, u_5, u_6} {m : ℕ} {Y : Type u_4} {P : Type u_5} {X : Type u_6}
+    [AddCommGroup Y] [AddCommGroup P] [AddCommGroup X] [Module (ZMod 2) Y] [Module (ZMod 2) P] [Module (ZMod 2) X]
+    (cellularComparison : Y ≃ₗ[ZMod 2] Trefoil.RelativeTopology.lensTwoCycles m)
+    (handleBasis : P ≃ₗ[ZMod 2] Trefoil.RelativeTopology.pieceHandleModule m) (boundaryMap : Y →ₗ[ZMod 2] P)
+    (inclusion : P →ₗ[ZMod 2] X) (mvExact : ∀ (z : P), inclusion z = 0 → ∃ y, boundaryMap y = z)
+    (coordinates : X ≃ₗ[ZMod 2] Trefoil.LatticeEmbedding.Ambient m → ZMod 2)
+    (root : Trefoil.LatticeEmbedding.RootIndex m → Trefoil.LatticeEmbedding.Vector m)
+    (A Bheavy C : Trefoil.LatticeEmbedding.Vector m)
+    (root_pairing :
+      ∀ (r s : Trefoil.LatticeEmbedding.RootIndex m),
+        Trefoil.LatticeSupports.dot (root r) (root s) = Trefoil.LatticeEmbedding.rootGram r s)
+    (normA : ∑ j, A j ^ 2 = 4) (normB : ∑ j, Bheavy j ^ 2 = 6) (normC : ∑ j, C j ^ 2 = 3)
+    (pairingAB : Trefoil.LatticeSupports.dot A Bheavy = -1) (pairingAC : Trefoil.LatticeSupports.dot A C = 0)
+    (pairingBC : Trefoil.LatticeSupports.dot Bheavy C = 0)
+    (pairingA_root :
+      ∀ (r : Trefoil.LatticeEmbedding.RootIndex m),
+        Trefoil.LatticeSupports.dot A (root r) = Trefoil.LatticeEmbedding.aRootPairing r)
+    (pairingB_root :
+      ∀ (r : Trefoil.LatticeEmbedding.RootIndex m),
+        Trefoil.LatticeSupports.dot Bheavy (root r) = Trefoil.LatticeEmbedding.bRootPairing r)
+    (pairingC_root :
+      ∀ (r : Trefoil.LatticeEmbedding.RootIndex m),
+        Trefoil.LatticeSupports.dot C (root r) = Trefoil.LatticeEmbedding.cRootPairing r)
+    (naturality :
+      ∀ (r : Option (Trefoil.LatticeEmbedding.RootIndex m)) (j : Trefoil.LatticeEmbedding.Ambient m),
+        coordinates
+            (inclusion (handleBasis.symm ((Trefoil.RelativeTopology.canonicalSelectedHandles m) (Finsupp.single r 1))))
+            j =
+          match r with
+          | none => ↑(Bheavy j)
+          | some i => ↑(root i j)) :
+    Trefoil.RelativeTopology.ManifoldHomologyData m Y P X
+theorem Trefoil.RelativeTopology.no_manifold_homology_data.{u_1, u_2, u_3} : ∀ {Y : Type u_1} {P : Type u_2}
+  {X : Type u_3} [inst : AddCommGroup Y] [inst_1 : AddCommGroup P] [inst_2 : AddCommGroup X]
+  [inst_3 : Module (ZMod 2) Y] [inst_4 : Module (ZMod 2) P] [inst_5 : Module (ZMod 2) X] {m : ℕ},
+  m = 4 ∨ 6 ≤ m → ∀ (d : Trefoil.RelativeTopology.ManifoldHomologyData m Y P X), False :=
+fun {Y} {P} {X} [AddCommGroup Y] [AddCommGroup P] [AddCommGroup X] [Module (ZMod 2) Y] [Module (ZMod 2) P]
+    [Module (ZMod 2) X] {m} hm d =>
+  Trefoil.RelativeTopology.no_canonical_gluing_data hm d.toCanonical

@@ -1,0 +1,2 @@
+✔ [879/879] Built Trefoil.Section2Certificate
+Build completed successfully.

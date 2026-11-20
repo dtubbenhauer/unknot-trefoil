@@ -1,0 +1,174 @@
+{
+  "success": true,
+  "scope": "Section 3B and the combined Section 3 lower bound",
+  "checked_at_utc": "2026-11-20T08:07:41.382151+00:00",
+  "clean_project_build": false,
+  "tool_versions": {
+    "lean": "Lean (version 4.22.0-rc2, x86_64-unknown-linux-gnu, commit 6a60de2ac701d1a3f5dc88894b7822f17c3a980b, Release)",
+    "lake": "Lake version 5.0.0-src+6a60de2 (Lean version 4.22.0-rc2)"
+  },
+  "dependency_revisions": {
+    "plausible": "151892dbc73e6c6033ca33f5a63ae20e57ad75ea",
+    "LeanSearchClient": "6c62474116f525d2814f0157bb468bf3a4f9f120",
+    "importGraph": "2bf782bac3fc773faf4aaab8c735a5a01c189a2d",
+    "proofwidgets": "e33ec3e6393358e5764f6acd95a6227e2b9f10bd",
+    "aesop": "8f2d76dce940f1364878dd9b7fde299b607a71ba",
+    "Qq": "0632bccc9007cb1c2baf275298f40b15a81fdc90",
+    "batteries": "14ac7be905d97a24c53a3247ebf5c5d9c00adc26",
+    "Cli": "a8733224c9aad9d372d82f208e32da1eed667875",
+    "mathlib": "49af9b7fd7e19db08a946b5bd08d1a5bc39dfd3d"
+  },
+  "section3b_reference_axioms": {
+    "Trefoil.Section3BMinimum.spinBase_245": [],
+    "Trefoil.Section3BMinimum.lensCorrection_245": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Trefoil.Section3BMinimum.finiteLabel_double": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Trefoil.Section3BMinimum.surgeryMatrixZ_det": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Trefoil.Section3BMinimum.quadraticBound_translate": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Trefoil.Section3BMinimum.quadraticBound_translate_even": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Trefoil.Section3BMinimum.characteristic_iff_twice": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Trefoil.Section3BMinimum.doubled_characteristic_value": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Trefoil.Section3BMinimum.doubleClassesEquiv": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Trefoil.Section3BMinimum.OwensMinimum.changeCorrection": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Trefoil.Section3BMinimum.minimum_to_comparison": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Trefoil.Section3BMinimum.no_owens_minimum_245": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Trefoil.Section3BTopology.raw_spin_245": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Trefoil.Section3BTopology.oriented_correction_245": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Trefoil.Section3BTopology.section3B_oriented_lower_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Trefoil.Section3BTopology.section3B_lower_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Trefoil.Section3LowerBound.section3_lower_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "source_and_pin_sha256": {
+    "SECTION2_Reference_Audit.lean": "8f86d8dfe4a39cc5c5c1855c24295f04c7da2a966865230fa87f230531854ca9",
+    "SECTION3A_Project_Audit.lean": "67d762b5cad8a3bcaf44c6622fa74e44899a4b8e3ce84cb5a19e8d12e68f1028",
+    "SECTION3A_Reference_Audit.lean": "cd4b9baceb515379944902d199aa7367dbca8701f924711f0136c60fee8afc97",
+    "SECTION3B_Reference_Audit.lean": "bc88be2816a92be9f728e6529b946735289b091a57842d1e69abc4328e75c93b",
+    "Trefoil/Arithmetic.lean": "277e1c951609bac7dcc7eb85311d9c51a5001511a23ec0d3e10f2dd37cd5bad7",
+    "Trefoil/Consequences.lean": "63ee0d11167f0e31b2101db335ff74ea02643fc08f1d0b35559f3250281b39c8",
+    "Trefoil/FiniteCorrectionTerms.lean": "a6bc3c652b4fd7f665e7cefd0b2dcca043760ae453b8451109076518122551a3",
+    "Trefoil/FiniteForms.lean": "ea1b581d01123f9e3678aa0b8a741ccce184ff62e010962f526d833b228ae591",
+    "Trefoil/FiniteObstruction.lean": "15d2fd7be0a5057ff2f0795f5820cdc05875893804b7505349ddfb03841beec8",
+    "Trefoil/LatticeArithmetic.lean": "bcf054a1fa98b5704c75471fa615bc938508de8b2fad2e788c996edcf0057884",
+    "Trefoil/LatticeBasics.lean": "737da15f7c378bd98ca35ed840bcf636d933578e2007238bf7ff044d59cbc702",
+    "Trefoil/LatticeBlocks.lean": "a6ec139b9b2bca8301d5fed79d92e3525dfe8e98072fd0a64845b1bd5dece77a",
+    "Trefoil/LatticeCoordinates.lean": "40b26dc9a4ea94fc3adaffa7dce10b27170294fff6f2d98a7164bd82b318053d",
+    "Trefoil/LatticeEmbedding.lean": "00055e8ca67884a77b44c733c3bbff61a7a62de0e8ddac2470799f376ba8ad96",
+    "Trefoil/LatticeExtraction.lean": "8c820121dedb03758878c8293184e525b268adb9635b53de33d2322396b699a2",
+    "Trefoil/LatticeFrameParity.lean": "88d371f4e2a24c4aba68a557304a41253761fc7a94f415e8d0606839b2c1ea5d",
+    "Trefoil/LatticeIsometry.lean": "3b4b01ca9e235e47b9b15a8265db40bb3ab3f800cdc61ef0d95eb0f6e47626a6",
+    "Trefoil/LatticeOddBasis.lean": "c568b17623eb8306d19aa41dde56005c33b6b39c74ef7d9be99b1f168570d8e8",
+    "Trefoil/LatticeParity.lean": "72c2e4c3e521c16fa65430bdb17a7205e18155287666c33edc30faace0e2f8f8",
+    "Trefoil/LatticePath.lean": "1162bdbf58a55e4ba1d6fe7ae14174802cf040cba8ca8d8262703280ffc54498",
+    "Trefoil/LatticeShapes.lean": "38abb00f7ec31fa4c5baf87edac1f206de9dc7b03db5fc954e67f3285e622677",
+    "Trefoil/LatticeSigns.lean": "094bf468b9010111a86155f62b2ae469e496a65be94e7c8466b0f9fae702ebd7",
+    "Trefoil/LatticeSupports.lean": "f29a12f8fe99fdd74a90bc71801efc195855f59b6c3906b0ba90cf8f9b5f87e6",
+    "Trefoil/Section2Arithmetic.lean": "7b8f5e1aa57407963ef7a84c7ca9432859497ad8157521c1ccd04fc75e8400ea",
+    "Trefoil/Section2Certificate.lean": "b782fb9d6ff7edf31429062fe8ae0a85a747ddd70235bb9f542e44926d3fb3b9",
+    "Trefoil/Section2DiagramData.lean": "ec3b0c26e3f556571999beb4c132ec6232ddc1ed8ea4c8a41aed1d1f421f71c6",
+    "Trefoil/Section2DiagramDataEven.lean": "d1bc7bae89a9f0620256dd87bf85fa3a2ab9de44126f9bb4e7dd938e64af0b9b",
+    "Trefoil/Section2DiagramDataOdd.lean": "2bf2031cb049a7ef31c18de09b46aa916205ff76be91bc08d756fe25bedb1514",
+    "Trefoil/Section2DiagramDataSeed.lean": "4566293b2661cd073eeaf5d538bbd1d6e6544ce316904fb33e14294a771bc2d3",
+    "Trefoil/Section2DiagramDomainData.lean": "95d7a605e20a079ff2b43636a2aabefb6248edeba38f163da0d4f8066790745d",
+    "Trefoil/Section2DiagramDomainDataEven.lean": "de540d409bd59caed905053489287ce9d46c37c54e850fd53114b8a5dadf2b8e",
+    "Trefoil/Section2DiagramDomainDataOdd.lean": "a0daebd1c3b68523eb08b7f6cec2c49f135da51f8d65005076ae3b0a413717ef",
+    "Trefoil/Section2DiagramDomainDataSeed.lean": "3a8cf154b2dbd7e1774392dca9d221da808ef345098b5c4e8a645a64451b11c9",
+    "Trefoil/Section2DiagramDomains.lean": "257ccdc79be8bf30c654ddfa838553b16db59a8d9cd3ff82aa38779ce71e71e0",
+    "Trefoil/Section2DiagramModelData.lean": "d4273f772b6229bf4cdc98d9d469d5b6c66fe09a83ab03005ff170f92e32f369",
+    "Trefoil/Section2DiagramMoves.lean": "d1e1c988fe9b9875f4586546bcbf966055870980278a8e86ba68e7f324c578ef",
+    "Trefoil/Section2InitialExterior.lean": "96573e1e7778f205dbd6416470cf14358c49efcde27d165e82ed68e4456d7218",
+    "Trefoil/Section2Pachner.lean": "126223ae2bf6c0c9f6c5e3ec0388ed1170830e6be3e5c1456a43a282c62f9bc1",
+    "Trefoil/Section2ReferenceTangle.lean": "19e75a2a64726e5b49c1970410fd47d08c7990328760b85095e2985c6c901917",
+    "Trefoil/Section2SwitchData.lean": "4cd59a45cb069587c8e7d4034e117478fc432dcfef09788e8dec24abb088e6c2",
+    "Trefoil/Section2Switches.lean": "b4d03ee9e1fe86334028b357b0e7f26e78c5ea0e84a9b35e96639ab9b3fd10a4",
+    "Trefoil/Section2Topology.lean": "5efa8abc582991ae5dc110c90244fc86f54f2ca82531ef85229122537449733f",
+    "Trefoil/Section2TriangulationData/Base.lean": "212ec48b94dbe22805340a8648d6cba5dff55c15508084ed2432501b7bef13fe",
+    "Trefoil/Section2TriangulationData/EvenFirstIntermediate.lean": "715a0a2f379abb93f711c9b07325dd12b29cc3487be66f7af72ff33ea77fad76",
+    "Trefoil/Section2TriangulationData/EvenPartnerReference.lean": "cd135e5246b553797f7d3b5472fb3790f769d252ad333391abfc144c70d06d4e",
+    "Trefoil/Section2TriangulationData/EvenSecondIntermediate.lean": "284f6a8ce9fd08480dac249407c10760ab13f8de94398492bf9b5452d750bb13",
+    "Trefoil/Section2TriangulationData/NamedFirstIntermediate.lean": "46ee7aadb662dc82ea9ec25dccfcccc0345a01b7fe2cf456737814c11dd07c39",
+    "Trefoil/Section2TriangulationData/NamedPartnerReference.lean": "64e227b6a0bd154dc68ce07a4132df0127e55729a88f56c5c02a7797ec3ff58a",
+    "Trefoil/Section2TriangulationData/NamedPartnerTable.lean": "c133c19d15c6152dca3bc1693812082722886fc70825235083fc43a5b0eda74f",
+    "Trefoil/Section2TriangulationData/NamedSecondIntermediate.lean": "b01b7421d8e53f662b7e6dcf70b5357b27c0385b7258ade7470d2b5dbbfc841e",
+    "Trefoil/Section2TriangulationData/OddFirstIntermediate.lean": "68235de31705c53f2ffae1f8a9397e7bb7c87042f01ac70eaaf9c63a80c2dd87",
+    "Trefoil/Section2TriangulationData/OddPartnerReference.lean": "efd7b9568265282f06c5793f7280d517dd21d1866c6ff856369e44a0afe02cba",
+    "Trefoil/Section2TriangulationData/OddSecondIntermediate.lean": "abb8befafdbc9811d44b3a0966e9658a5d413849fb4367f2d31f1b96f40c6b7d",
+    "Trefoil/Section2TriangulationData.lean": "7178bb02aced0d0a0338526d2d76287fd872d3da28e7e7e1b9fee67c2506b910",
+    "Trefoil/Section2Triangulations.lean": "8b6119930976afd348eb36136b9b74a0f972fc7aa0251283a63ff825f3a1740e",
+    "Trefoil/Section3ACoefficients.lean": "a343ebe792d8ed31747d619ca66c1e5654c3964525802f93bffbbecc40923ed9",
+    "Trefoil/Section3APlumbing.lean": "b4b1d919861ad80e7bae9a2f63d0c2f28d2f5ff5e665099a33a5cd089bcc1e29",
+    "Trefoil/Section3ASignature.lean": "5975146f62c3aa1e9309e0e92fb9fc92347f6b9d2edae9a0ec9d2f9e1569899d",
+    "Trefoil/Section3ATopology.lean": "3cf456584209f129e5ecf321b75736e57fd2f32aa81b7b8ba9be127163d343e4",
+    "Trefoil/Section3BMinimum.lean": "24e2a28e89d327dcccbcfb38f0fda63cd3a1c67b5efc3e789387818526dc810c",
+    "Trefoil/Section3BTopology.lean": "91cd47328e4b9d039cc0906396ca42d837be73372c35ffe02532e601d919fa7c",
+    "Trefoil/Section3LowerBound.lean": "9612b3f74e39073b5b3d156114d4aee1557ef3271a36c96674ab594cbf159930",
+    "Trefoil.lean": "351a716257cfcb59a2c42a25aa538d601a8c8745d82a7e625239ce568ac2b9be",
+    "TrefoilAudit.lean": "75042930ee9e316b9e624ccbaabe7ebae192e99e073e893002829f7d3e1b35c1",
+    "experimental/Section3ACanonicalTopology.lean": "d59437a5458b6a122aa4e6917fd76b303779a3cf1244946f63a9b4ae1fc011e2",
+    "experimental/Section3AExplicitHomology.lean": "14b0571fccec72a4106e22cea58f2e21b86e000983789f91fcd0bde5a403ad54",
+    "experimental/Section3ARelativeMVStandalone.lean": "30bcb67a61f7a03642c6310ef937c41c3f2aafa9c16dca43a457df55082d1c67",
+    "lean-toolchain": "b05d3edb32231e9f94e5621652c0b8889a9d5664c1200286e78b2bcf9a4b03fd",
+    "lake-manifest.json": "ba08c71997b029cd28bdc20f7f4199e68e8cbeb29e7016eeb368275e40d50c6f",
+    "lakefile.toml": "a25090372095e93dcb6f7ee29a12f62868b7680d1215e3c74db7319e68a7f3e4"
+  }
+}

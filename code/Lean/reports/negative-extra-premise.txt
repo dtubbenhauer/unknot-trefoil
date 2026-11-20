@@ -1,0 +1,6 @@
+/tmp/trefoil-audit-_cx1ijz6/ExtraPremise.lean:3:110: error: type mismatch
+  changedEndpoint
+has type
+  False → ∀ {h a s : ℤ}, Trefoil.Finite.ReducedForm h a s → ¬Trefoil.Finite.HasCorrectionComparison h a s : Prop
+but is expected to have type
+  ∀ {h a s : ℤ}, Trefoil.Finite.ReducedForm h a s → ¬Trefoil.Finite.HasCorrectionComparison h a s : Prop

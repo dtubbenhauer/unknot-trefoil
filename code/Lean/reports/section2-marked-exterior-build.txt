@@ -1,0 +1,23 @@
+$ lake build Trefoil.Section2TriangulationData.EvenFirstIntermediate
+✔ [612/613] Built Trefoil.Section2TriangulationData.Base
+✔ [613/613] Built Trefoil.Section2TriangulationData.EvenFirstIntermediate
+Build completed successfully.
+Build exit 0; wall 247.4s
+$ lake build Trefoil.Section2TriangulationData.NamedPartnerReference
+✔ [614/617] Built Trefoil.Section2TriangulationData.NamedSecondIntermediate
+✔ [615/617] Built Trefoil.Section2TriangulationData.EvenPartnerReference
+✔ [616/617] Built Trefoil.Section2TriangulationData.OddSecondIntermediate
+✔ [617/617] Built Trefoil.Section2TriangulationData.NamedPartnerReference
+Build completed successfully.
+Build exit 0; wall 161.9s
+$ lake build Trefoil.Section2TriangulationData.NamedPartnerTable
+✔ [613/617] Built Trefoil.Section2TriangulationData.EvenSecondIntermediate
+✔ [614/617] Built Trefoil.Section2TriangulationData.OddFirstIntermediate
+✔ [615/617] Built Trefoil.Section2TriangulationData.OddPartnerReference
+✔ [616/617] Built Trefoil.Section2TriangulationData.NamedFirstIntermediate
+✔ [617/617] Built Trefoil.Section2TriangulationData.NamedPartnerTable
+Build completed successfully.
+Build exit 0; wall 215.2s
+$ lake build Trefoil.Section2TriangulationData
+✔ [623/623] Built Trefoil.Section2TriangulationData
+Build completed successfully.

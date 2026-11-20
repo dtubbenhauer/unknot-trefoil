@@ -1,0 +1,365 @@
+structure Trefoil.Section2Topology.KnotGeometry : Type 1
+number of parameters: 0
+fields:
+  Trefoil.Section2Topology.KnotGeometry.Knot : Type
+  Trefoil.Section2Topology.KnotGeometry.unknot : self.Knot
+  Trefoil.Section2Topology.KnotGeometry.trefoil : self.Knot
+  Trefoil.Section2Topology.KnotGeometry.mirror : self.Knot → self.Knot
+  Trefoil.Section2Topology.KnotGeometry.connectedSum : self.Knot → self.Knot → self.Knot
+  Trefoil.Section2Topology.KnotGeometry.unknotting : self.Knot → ℕ
+  Trefoil.Section2Topology.KnotGeometry.switch : self.Knot → self.Knot → Prop
+  Trefoil.Section2Topology.KnotGeometry.conway : List ℤ → self.Knot
+  Trefoil.Section2Topology.KnotGeometry.numerator : ℤ × ℤ → self.Knot
+constructor:
+  Trefoil.Section2Topology.KnotGeometry.mk (Knot : Type) (unknot trefoil : Knot) (mirror : Knot → Knot)
+    (connectedSum : Knot → Knot → Knot) (unknotting : Knot → ℕ) (switch : Knot → Knot → Prop) (conway : List ℤ → Knot)
+    (numerator : ℤ × ℤ → Knot) : KnotGeometry
+structure Trefoil.Section2Topology.KnotReferences (K : KnotGeometry) : Prop
+number of parameters: 1
+fields:
+  Trefoil.Section2Topology.KnotReferences.path_bound : ∀ {n : ℕ} {j : K.Knot},
+      Changes K.switch n j K.unknot → K.unknotting j ≤ n
+  Trefoil.Section2Topology.KnotReferences.mirror_switch : ∀ {j k : K.Knot},
+      K.switch j k → K.switch (K.mirror j) (K.mirror k)
+  Trefoil.Section2Topology.KnotReferences.mirror_unknotting : ∀ (j : K.Knot), K.unknotting (K.mirror j) = K.unknotting j
+  Trefoil.Section2Topology.KnotReferences.mirror_unknot : K.mirror K.unknot = K.unknot
+  Trefoil.Section2Topology.KnotReferences.box_switch : ∀ {D E : Trefoil.Section2Arithmetic.TwistDiagram},
+      Trefoil.Section2Arithmetic.TwistDiagramSwitch D E →
+        Odd (Trefoil.Arithmetic.plusPair (Trefoil.Section2Arithmetic.diagramWeights D)).1 →
+          K.switch (K.conway (Trefoil.Section2Arithmetic.diagramWeights D))
+            (K.conway (Trefoil.Section2Arithmetic.diagramWeights E))
+  Trefoil.Section2Topology.KnotReferences.closure_fraction : ∀ (weights : List ℤ),
+      Odd (Trefoil.Arithmetic.plusPair weights).1 → K.conway weights = K.numerator (Trefoil.Arithmetic.plusPair weights)
+  Trefoil.Section2Topology.KnotReferences.infinity_unknot : K.numerator (1, 0) = K.unknot
+constructor:
+  Trefoil.Section2Topology.KnotReferences.mk {K : KnotGeometry}
+    (path_bound : ∀ {n : ℕ} {j : K.Knot}, Changes K.switch n j K.unknot → K.unknotting j ≤ n)
+    (mirror_switch : ∀ {j k : K.Knot}, K.switch j k → K.switch (K.mirror j) (K.mirror k))
+    (mirror_unknotting : ∀ (j : K.Knot), K.unknotting (K.mirror j) = K.unknotting j)
+    (mirror_unknot : K.mirror K.unknot = K.unknot)
+    (box_switch :
+      ∀ {D E : Trefoil.Section2Arithmetic.TwistDiagram},
+        Trefoil.Section2Arithmetic.TwistDiagramSwitch D E →
+          Odd (Trefoil.Arithmetic.plusPair (Trefoil.Section2Arithmetic.diagramWeights D)).1 →
+            K.switch (K.conway (Trefoil.Section2Arithmetic.diagramWeights D))
+              (K.conway (Trefoil.Section2Arithmetic.diagramWeights E)))
+    (closure_fraction :
+      ∀ (weights : List ℤ),
+        Odd (Trefoil.Arithmetic.plusPair weights).1 →
+          K.conway weights = K.numerator (Trefoil.Arithmetic.plusPair weights))
+    (infinity_unknot : K.numerator (1, 0) = K.unknot) : KnotReferences K
+structure Trefoil.Section2Topology.AugmentedGeometry (K : KnotGeometry) : Type 1
+number of parameters: 1
+fields:
+  Trefoil.Section2Topology.AugmentedGeometry.Link : Type
+  Trefoil.Section2Topology.AugmentedGeometry.fill : self.Link → ℤ × ℤ → K.Knot
+  Trefoil.Section2Topology.AugmentedGeometry.crossingAway : self.Link → self.Link → Prop
+  Trefoil.Section2Topology.AugmentedGeometry.splitOff : self.Link → K.Knot → self.Link → Prop
+  Trefoil.Section2Topology.AugmentedGeometry.terminalUnlink : self.Link → Prop
+  Trefoil.Section2Topology.AugmentedGeometry.markedExterior : ExteriorAction → self.Link → self.Link → Prop
+  Trefoil.Section2Topology.AugmentedGeometry.axisChart : Fin 2 → ℤ × ℤ → self.Link
+constructor:
+  Trefoil.Section2Topology.AugmentedGeometry.mk {K : KnotGeometry} (Link : Type) (fill : Link → ℤ × ℤ → K.Knot)
+    (crossingAway : Link → Link → Prop) (splitOff : Link → K.Knot → Link → Prop) (terminalUnlink : Link → Prop)
+    (markedExterior : ExteriorAction → Link → Link → Prop) (axisChart : Fin 2 → ℤ × ℤ → Link) : AugmentedGeometry K
+structure Trefoil.Section2Topology.FillingReferences {K : KnotGeometry} (A : AugmentedGeometry K) : Prop
+number of parameters: 2
+fields:
+  Trefoil.Section2Topology.FillingReferences.crossing_fills : ∀ {d e : A.Link} (t : ℤ),
+      A.crossingAway d e →
+        K.switch (A.fill d (Trefoil.Section2Arithmetic.twistSlope t))
+          (A.fill e (Trefoil.Section2Arithmetic.twistSlope t))
+  Trefoil.Section2Topology.FillingReferences.split_fills : ∀ {d e : A.Link} {k : K.Knot} (t : ℤ),
+      A.splitOff d k e →
+        A.fill d (Trefoil.Section2Arithmetic.twistSlope t) =
+          K.connectedSum k (A.fill e (Trefoil.Section2Arithmetic.twistSlope t))
+  Trefoil.Section2Topology.FillingReferences.unlink_fills : ∀ {d : A.Link} (t : ℤ),
+      A.terminalUnlink d → A.fill d (Trefoil.Section2Arithmetic.twistSlope t) = K.unknot
+  Trefoil.Section2Topology.FillingReferences.marked_fills : ∀ {d e : A.Link} {action : ExteriorAction} (t : ℤ),
+      A.markedExterior action d e →
+        A.fill d (Trefoil.Section2Arithmetic.twistSlope t) =
+          ExteriorAction.onKnot K action (A.fill e (action.onSlope (Trefoil.Section2Arithmetic.twistSlope t)))
+  Trefoil.Section2Topology.FillingReferences.fill_chart : ∀ (b : Fin 2) (t : ℕ) (tail : ℤ × ℤ),
+      tail.1.natAbs.Coprime tail.2.natAbs →
+        Odd (Trefoil.Section2Arithmetic.tangleAdd (↑(Trefoil.Section2Arithmetic.halfTwists b t), 1) tail).1 →
+          A.fill (A.axisChart b tail) (Trefoil.Section2Arithmetic.twistSlope (-↑t)) =
+            K.numerator (Trefoil.Section2Arithmetic.tangleAdd (↑(Trefoil.Section2Arithmetic.halfTwists b t), 1) tail)
+constructor:
+  Trefoil.Section2Topology.FillingReferences.mk {K : KnotGeometry} {A : AugmentedGeometry K}
+    (crossing_fills :
+      ∀ {d e : A.Link} (t : ℤ),
+        A.crossingAway d e →
+          K.switch (A.fill d (Trefoil.Section2Arithmetic.twistSlope t))
+            (A.fill e (Trefoil.Section2Arithmetic.twistSlope t)))
+    (split_fills :
+      ∀ {d e : A.Link} {k : K.Knot} (t : ℤ),
+        A.splitOff d k e →
+          A.fill d (Trefoil.Section2Arithmetic.twistSlope t) =
+            K.connectedSum k (A.fill e (Trefoil.Section2Arithmetic.twistSlope t)))
+    (unlink_fills :
+      ∀ {d : A.Link} (t : ℤ), A.terminalUnlink d → A.fill d (Trefoil.Section2Arithmetic.twistSlope t) = K.unknot)
+    (marked_fills :
+      ∀ {d e : A.Link} {action : ExteriorAction} (t : ℤ),
+        A.markedExterior action d e →
+          A.fill d (Trefoil.Section2Arithmetic.twistSlope t) =
+            ExteriorAction.onKnot K action (A.fill e (action.onSlope (Trefoil.Section2Arithmetic.twistSlope t))))
+    (fill_chart :
+      ∀ (b : Fin 2) (t : ℕ) (tail : ℤ × ℤ),
+        tail.1.natAbs.Coprime tail.2.natAbs →
+          Odd (Trefoil.Section2Arithmetic.tangleAdd (↑(Trefoil.Section2Arithmetic.halfTwists b t), 1) tail).1 →
+            A.fill (A.axisChart b tail) (Trefoil.Section2Arithmetic.twistSlope (-↑t)) =
+              K.numerator
+                (Trefoil.Section2Arithmetic.tangleAdd (↑(Trefoil.Section2Arithmetic.halfTwists b t), 1) tail)) :
+    FillingReferences A
+structure Trefoil.Section2Certificate.DiagramGeometry {K : KnotGeometry} (A : AugmentedGeometry K) : Type
+number of parameters: 2
+fields:
+  Trefoil.Section2Certificate.DiagramGeometry.knot : Trefoil.Section2DiagramMoves.Diagram → K.Knot
+  Trefoil.Section2Certificate.DiagramGeometry.augmented : Trefoil.Section2DiagramMoves.Diagram →
+      Trefoil.Section2DiagramMoves.Dart → A.Link
+  Trefoil.Section2Certificate.DiagramGeometry.hasMarkedExterior : A.Link →
+      Trefoil.Section2Triangulations.Triangulation → Trefoil.Section2Triangulations.CuspMarking → ℕ → Prop
+  Trefoil.Section2Certificate.DiagramGeometry.hasKnotExterior : K.Knot →
+      Trefoil.Section2Triangulations.Triangulation → Trefoil.Section2Triangulations.CuspMarking → Prop
+constructor:
+  Trefoil.Section2Certificate.DiagramGeometry.mk {K : KnotGeometry} {A : AugmentedGeometry K}
+    (knot : Trefoil.Section2DiagramMoves.Diagram → K.Knot)
+    (augmented : Trefoil.Section2DiagramMoves.Diagram → Trefoil.Section2DiagramMoves.Dart → A.Link)
+    (hasMarkedExterior :
+      A.Link → Trefoil.Section2Triangulations.Triangulation → Trefoil.Section2Triangulations.CuspMarking → ℕ → Prop)
+    (hasKnotExterior :
+      K.Knot → Trefoil.Section2Triangulations.Triangulation → Trefoil.Section2Triangulations.CuspMarking → Prop) :
+    DiagramGeometry A
+structure Trefoil.Section2Certificate.DiagramReferences {K : KnotGeometry} {A : AugmentedGeometry K}
+  (I : DiagramGeometry A) : Prop
+number of parameters: 3
+fields:
+  Trefoil.Section2Certificate.DiagramReferences.ordinary_move : ∀ (D E : Trefoil.Section2DiagramMoves.Diagram)
+      (move : Trefoil.Section2DiagramMoves.Move),
+      D.knotDiagram = true →
+        E.knotDiagram = true → Trefoil.Section2DiagramMoves.checkMove D E move = true → I.knot D = I.knot E
+  Trefoil.Section2Certificate.DiagramReferences.marked_move : ∀ (D E : Trefoil.Section2DiagramMoves.Diagram)
+      (move : Trefoil.Section2DiagramMoves.Move) (a b : Trefoil.Section2DiagramMoves.Dart),
+      D.markedDiagram a = true →
+        E.markedDiagram b = true →
+          Trefoil.Section2DiagramMoves.checkMove D E move = true →
+            Trefoil.Section2DiagramMoves.Move.transportAnchor a move = some b → I.augmented D a = I.augmented E b
+  Trefoil.Section2Certificate.DiagramReferences.split : ∀ (D : Trefoil.Section2DiagramMoves.Diagram)
+      (a b c : Trefoil.Section2DiagramMoves.Dart) (L R : Trefoil.Section2DiagramMoves.Diagram),
+      D.markedDiagram c = true →
+        L.knotDiagram = true →
+          R.markedDiagram c = true →
+            D.checkSplit a b (some c) L R = true → A.splitOff (I.augmented D c) (I.knot L) (I.augmented R c)
+  Trefoil.Section2Certificate.DiagramReferences.terminal : ∀ (D : Trefoil.Section2DiagramMoves.Diagram)
+      (axis : Trefoil.Section2DiagramMoves.Dart) (trace : Trefoil.Section2DiagramMoves.Trace),
+      D.markedDiagram axis = true →
+        Trefoil.Section2DiagramMoves.CertifiedMoves D trace →
+          Trefoil.Section2DiagramMoves.Trace.withComponents D 2 trace = true →
+            Trefoil.Section2DiagramMoves.Trace.endpoint D trace = { rows := [], circles := 2 } →
+              A.terminalUnlink (I.augmented D axis)
+  Trefoil.Section2Certificate.DiagramReferences.switch : ∀ (D E : Trefoil.Section2DiagramMoves.Diagram) (i : ℕ)
+      (a b : Trefoil.Section2DiagramMoves.Dart)
+      (p : List (Trefoil.Section2DiagramMoves.Dart × Trefoil.Section2DiagramMoves.Dart)),
+      D.markedDiagram a = true →
+        E.markedDiagram b = true →
+          Trefoil.Section2Switches.checkSwitch D E i (some a) (some b) p = true →
+            A.crossingAway (I.augmented D a) (I.augmented E b)
+  Trefoil.Section2Certificate.DiagramReferences.ordinary_split : ∀ (D : Trefoil.Section2DiagramMoves.Diagram)
+      (a b : Trefoil.Section2DiagramMoves.Dart) (L R : Trefoil.Section2DiagramMoves.Diagram),
+      D.knotDiagram = true →
+        L.knotDiagram = true →
+          R.knotDiagram = true → D.checkSplit a b none L R = true → I.knot D = K.connectedSum (I.knot L) (I.knot R)
+  Trefoil.Section2Certificate.DiagramReferences.ordinary_terminal : ∀ (D : Trefoil.Section2DiagramMoves.Diagram)
+      (trace : Trefoil.Section2DiagramMoves.Trace),
+      Trefoil.Section2DiagramMoves.CertifiedMoves D trace →
+        Trefoil.Section2DiagramMoves.Trace.withComponents D 1 trace = true →
+          Trefoil.Section2DiagramMoves.Trace.endpoint D trace = { rows := [], circles := 1 } → I.knot D = K.unknot
+  Trefoil.Section2Certificate.DiagramReferences.ordinary_switch : ∀ (D E : Trefoil.Section2DiagramMoves.Diagram) (i : ℕ)
+      (p : List (Trefoil.Section2DiagramMoves.Dart × Trefoil.Section2DiagramMoves.Dart)),
+      D.knotDiagram = true →
+        E.knotDiagram = true →
+          Trefoil.Section2Switches.checkSwitch D E i none none p = true → K.switch (I.knot D) (I.knot E)
+  Trefoil.Section2Certificate.DiagramReferences.ordinary_iso : ∀ (c : Trefoil.Section2TriangulationData.Certificate)
+      (l r : K.Knot),
+      I.hasKnotExterior l c.source c.sourceMarking →
+        I.hasKnotExterior r c.target c.targetMarking →
+          ∀
+            (a :
+              Trefoil.Section2Triangulations.MarkedIsomorphism c.source c.target c.tetMap c.reverse c.sourceMarking
+                c.targetMarking c.peripheral),
+            Trefoil.Section2TriangulationData.hasMarkedSlope c → l = ExteriorAction.onKnot K (action c.reverse) r
+  Trefoil.Section2Certificate.DiagramReferences.ordinary_chart : ∀ (twists : ℤ) (tail : List ℤ),
+      Odd (Trefoil.Section2Arithmetic.tangleAdd (twists, 1) (Trefoil.Arithmetic.plusPair tail)).1 →
+        I.knot (Trefoil.Section2ReferenceTangle.ordinaryReference twists tail) =
+          K.numerator (Trefoil.Section2Arithmetic.tangleAdd (twists, 1) (Trefoil.Arithmetic.plusPair tail))
+  Trefoil.Section2Certificate.DiagramReferences.axis_chart : ∀ (b : Fin 2) (tail : List ℤ),
+      (Trefoil.Arithmetic.plusPair tail).1.natAbs.Coprime (Trefoil.Arithmetic.plusPair tail).2.natAbs →
+        Odd (Trefoil.Section2Arithmetic.tangleAdd (↑↑b, 1) (Trefoil.Arithmetic.plusPair tail)).1 →
+          I.augmented (Trefoil.Section2ReferenceTangle.axisChartDiagram (↑↑b) tail)
+              Trefoil.Section2ReferenceTangle.builtReferenceAxis =
+            A.axisChart b (Trefoil.Arithmetic.plusPair tail)
+  Trefoil.Section2Certificate.DiagramReferences.augmented_iso : ∀ (c : Trefoil.Section2TriangulationData.Certificate)
+      (l r : A.Link),
+      I.hasMarkedExterior l c.source c.sourceMarking c.sourceAxis →
+        I.hasMarkedExterior r c.target c.targetMarking c.targetAxis →
+          ∀
+            (a :
+              Trefoil.Section2Triangulations.MarkedIsomorphism c.source c.target c.tetMap c.reverse c.sourceMarking
+                c.targetMarking c.peripheral),
+            Trefoil.Section2TriangulationData.hasMarkedSlope c → A.markedExterior (action c.reverse) l r
+constructor:
+  Trefoil.Section2Certificate.DiagramReferences.mk {K : KnotGeometry} {A : AugmentedGeometry K} {I : DiagramGeometry A}
+    (ordinary_move :
+      ∀ (D E : Trefoil.Section2DiagramMoves.Diagram) (move : Trefoil.Section2DiagramMoves.Move),
+        D.knotDiagram = true →
+          E.knotDiagram = true → Trefoil.Section2DiagramMoves.checkMove D E move = true → I.knot D = I.knot E)
+    (marked_move :
+      ∀ (D E : Trefoil.Section2DiagramMoves.Diagram) (move : Trefoil.Section2DiagramMoves.Move)
+        (a b : Trefoil.Section2DiagramMoves.Dart),
+        D.markedDiagram a = true →
+          E.markedDiagram b = true →
+            Trefoil.Section2DiagramMoves.checkMove D E move = true →
+              Trefoil.Section2DiagramMoves.Move.transportAnchor a move = some b → I.augmented D a = I.augmented E b)
+    (split :
+      ∀ (D : Trefoil.Section2DiagramMoves.Diagram) (a b c : Trefoil.Section2DiagramMoves.Dart)
+        (L R : Trefoil.Section2DiagramMoves.Diagram),
+        D.markedDiagram c = true →
+          L.knotDiagram = true →
+            R.markedDiagram c = true →
+              D.checkSplit a b (some c) L R = true → A.splitOff (I.augmented D c) (I.knot L) (I.augmented R c))
+    (terminal :
+      ∀ (D : Trefoil.Section2DiagramMoves.Diagram) (axis : Trefoil.Section2DiagramMoves.Dart)
+        (trace : Trefoil.Section2DiagramMoves.Trace),
+        D.markedDiagram axis = true →
+          Trefoil.Section2DiagramMoves.CertifiedMoves D trace →
+            Trefoil.Section2DiagramMoves.Trace.withComponents D 2 trace = true →
+              Trefoil.Section2DiagramMoves.Trace.endpoint D trace = { rows := [], circles := 2 } →
+                A.terminalUnlink (I.augmented D axis))
+    (switch :
+      ∀ (D E : Trefoil.Section2DiagramMoves.Diagram) (i : ℕ) (a b : Trefoil.Section2DiagramMoves.Dart)
+        (p : List (Trefoil.Section2DiagramMoves.Dart × Trefoil.Section2DiagramMoves.Dart)),
+        D.markedDiagram a = true →
+          E.markedDiagram b = true →
+            Trefoil.Section2Switches.checkSwitch D E i (some a) (some b) p = true →
+              A.crossingAway (I.augmented D a) (I.augmented E b))
+    (ordinary_split :
+      ∀ (D : Trefoil.Section2DiagramMoves.Diagram) (a b : Trefoil.Section2DiagramMoves.Dart)
+        (L R : Trefoil.Section2DiagramMoves.Diagram),
+        D.knotDiagram = true →
+          L.knotDiagram = true →
+            R.knotDiagram = true → D.checkSplit a b none L R = true → I.knot D = K.connectedSum (I.knot L) (I.knot R))
+    (ordinary_terminal :
+      ∀ (D : Trefoil.Section2DiagramMoves.Diagram) (trace : Trefoil.Section2DiagramMoves.Trace),
+        Trefoil.Section2DiagramMoves.CertifiedMoves D trace →
+          Trefoil.Section2DiagramMoves.Trace.withComponents D 1 trace = true →
+            Trefoil.Section2DiagramMoves.Trace.endpoint D trace = { rows := [], circles := 1 } → I.knot D = K.unknot)
+    (ordinary_switch :
+      ∀ (D E : Trefoil.Section2DiagramMoves.Diagram) (i : ℕ)
+        (p : List (Trefoil.Section2DiagramMoves.Dart × Trefoil.Section2DiagramMoves.Dart)),
+        D.knotDiagram = true →
+          E.knotDiagram = true →
+            Trefoil.Section2Switches.checkSwitch D E i none none p = true → K.switch (I.knot D) (I.knot E))
+    (ordinary_iso :
+      ∀ (c : Trefoil.Section2TriangulationData.Certificate) (l r : K.Knot),
+        I.hasKnotExterior l c.source c.sourceMarking →
+          I.hasKnotExterior r c.target c.targetMarking →
+            ∀
+              (a :
+                Trefoil.Section2Triangulations.MarkedIsomorphism c.source c.target c.tetMap c.reverse c.sourceMarking
+                  c.targetMarking c.peripheral),
+              Trefoil.Section2TriangulationData.hasMarkedSlope c → l = ExteriorAction.onKnot K (action c.reverse) r)
+    (ordinary_chart :
+      ∀ (twists : ℤ) (tail : List ℤ),
+        Odd (Trefoil.Section2Arithmetic.tangleAdd (twists, 1) (Trefoil.Arithmetic.plusPair tail)).1 →
+          I.knot (Trefoil.Section2ReferenceTangle.ordinaryReference twists tail) =
+            K.numerator (Trefoil.Section2Arithmetic.tangleAdd (twists, 1) (Trefoil.Arithmetic.plusPair tail)))
+    (axis_chart :
+      ∀ (b : Fin 2) (tail : List ℤ),
+        (Trefoil.Arithmetic.plusPair tail).1.natAbs.Coprime (Trefoil.Arithmetic.plusPair tail).2.natAbs →
+          Odd (Trefoil.Section2Arithmetic.tangleAdd (↑↑b, 1) (Trefoil.Arithmetic.plusPair tail)).1 →
+            I.augmented (Trefoil.Section2ReferenceTangle.axisChartDiagram (↑↑b) tail)
+                Trefoil.Section2ReferenceTangle.builtReferenceAxis =
+              A.axisChart b (Trefoil.Arithmetic.plusPair tail))
+    (augmented_iso :
+      ∀ (c : Trefoil.Section2TriangulationData.Certificate) (l r : A.Link),
+        I.hasMarkedExterior l c.source c.sourceMarking c.sourceAxis →
+          I.hasMarkedExterior r c.target c.targetMarking c.targetAxis →
+            ∀
+              (a :
+                Trefoil.Section2Triangulations.MarkedIsomorphism c.source c.target c.tetMap c.reverse c.sourceMarking
+                  c.targetMarking c.peripheral),
+              Trefoil.Section2TriangulationData.hasMarkedSlope c → A.markedExterior (action c.reverse) l r) :
+    DiagramReferences I
+structure Trefoil.Section2Certificate.ExteriorBridges {K : KnotGeometry} {A : AugmentedGeometry K}
+  (I : DiagramGeometry A) : Prop
+number of parameters: 3
+fields:
+  Trefoil.Section2Certificate.ExteriorBridges.source : ∀ (b : Fin 2) (m : Trefoil.Section2TriangulationData.Match),
+      let c := Trefoil.Section2TriangulationData.data b m;
+      I.hasMarkedExterior (I.marked (rawDiagram b (sourceRole m))) c.source c.sourceMarking c.sourceAxis
+  Trefoil.Section2Certificate.ExteriorBridges.target : ∀ (b : Fin 2) (m : Trefoil.Section2TriangulationData.Match),
+      let c := Trefoil.Section2TriangulationData.data b m;
+      I.hasMarkedExterior (I.marked (rawDiagram b (targetRole m))) c.target c.targetMarking c.targetAxis
+constructor:
+  Trefoil.Section2Certificate.ExteriorBridges.mk {K : KnotGeometry} {A : AugmentedGeometry K} {I : DiagramGeometry A}
+    (source :
+      ∀ (b : Fin 2) (m : Trefoil.Section2TriangulationData.Match),
+        let c := Trefoil.Section2TriangulationData.data b m;
+        I.hasMarkedExterior (I.marked (rawDiagram b (sourceRole m))) c.source c.sourceMarking c.sourceAxis)
+    (target :
+      ∀ (b : Fin 2) (m : Trefoil.Section2TriangulationData.Match),
+        let c := Trefoil.Section2TriangulationData.data b m;
+        I.hasMarkedExterior (I.marked (rawDiagram b (targetRole m))) c.target c.targetMarking c.targetAxis) :
+    ExteriorBridges I
+structure Trefoil.Section2Certificate.SeedExteriorBridges {K : KnotGeometry} {A : AugmentedGeometry K}
+  (I : DiagramGeometry A) : Prop
+number of parameters: 3
+fields:
+  Trefoil.Section2Certificate.SeedExteriorBridges.source : ∀ (m : SeedMatch),
+      I.hasKnotExterior (I.knot m.sourceRaw) m.certificate.source m.certificate.sourceMarking
+  Trefoil.Section2Certificate.SeedExteriorBridges.target : ∀ (m : SeedMatch),
+      I.hasKnotExterior (I.knot m.targetRaw) m.certificate.target m.certificate.targetMarking
+constructor:
+  Trefoil.Section2Certificate.SeedExteriorBridges.mk {K : KnotGeometry} {A : AugmentedGeometry K}
+    {I : DiagramGeometry A}
+    (source :
+      ∀ (m : SeedMatch), I.hasKnotExterior (I.knot m.sourceRaw) m.certificate.source m.certificate.sourceMarking)
+    (target :
+      ∀ (m : SeedMatch), I.hasKnotExterior (I.knot m.targetRaw) m.certificate.target m.certificate.targetMarking) :
+    SeedExteriorBridges I
+structure Trefoil.Section2InitialExterior.SignedPD : Type
+number of parameters: 0
+fields:
+  Trefoil.Section2InitialExterior.SignedPD.arcs : Array (Array ℕ)
+  Trefoil.Section2InitialExterior.SignedPD.positive : Array Bool
+  Trefoil.Section2InitialExterior.SignedPD.componentSizes : Array ℕ
+constructor:
+  Trefoil.Section2InitialExterior.SignedPD.mk (arcs : Array (Array ℕ)) (positive : Array Bool)
+    (componentSizes : Array ℕ) : Trefoil.Section2InitialExterior.SignedPD
+def Trefoil.Section2Topology.partner : (K : KnotGeometry) → ℕ → K.Knot :=
+fun K m => K.mirror (K.conway (Trefoil.Section2Arithmetic.partnerWeights ↑m))
+'Trefoil.Section2Topology.partner_upper_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section2Topology.filled_movie' depends on axioms: [propext, Quot.sound]
+'Trefoil.Section2Topology.connected_sum_upper_bound' depends on axioms: [propext, Quot.sound]
+'Trefoil.Section2Certificate.family_upper_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section2Certificate.seed_movie' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section2Certificate.seed_reference_agrees' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section2Certificate.seed_partner_is_table' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section2Certificate.exterior_identification' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section2Certificate.diagram_to_raw' depends on axioms: [propext, Quot.sound]
+'Trefoil.Section2Certificate.reference_chart' depends on axioms: [propext, Quot.sound]
+'Trefoil.Section2Arithmetic.partner_three_local_switches' does not depend on any axioms
+'Trefoil.Section2Arithmetic.changedPartnerBoxes_infinity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section2DiagramMoves.CertifiedMoves.sound' depends on axioms: [propext]
+'Trefoil.Section2DiagramMoves.CertifiedMoves.markedSound' depends on axioms: [propext, Quot.sound]
+'Trefoil.Section2DiagramMoves.CertifiedMoves.knotSound' depends on axioms: [propext, Quot.sound]
+'Trefoil.Section2DiagramMoves.CertifiedMoves.markedPlanarSound' depends on axioms: [propext, Quot.sound]
+'Trefoil.Section2InitialExterior.checkSnapshot_of_tables' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Section2Pachner.checkMarkedMove_sound' depends on axioms: [propext, Quot.sound]
+'Trefoil.Section2Pachner.checkMove_sound' depends on axioms: [propext, Quot.sound]
+'Trefoil.Section2ReferenceTangle.evenReference_constructor' depends on axioms: [propext]
+'Trefoil.Section2ReferenceTangle.oddReference_constructor' depends on axioms: [propext]
+'Trefoil.Section2ReferenceTangle.seedReference_constructor' does not depend on any axioms
+'Trefoil.Section2ReferenceTangle.seedReference_constructor_domain' does not depend on any axioms
+'Trefoil.Section2TriangulationData.data_checked' does not depend on any axioms
+'Trefoil.Section2TriangulationData.data_slopes' does not depend on any axioms

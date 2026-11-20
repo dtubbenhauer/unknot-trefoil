@@ -1,0 +1,163 @@
+'Trefoil.Arithmetic.partner_fraction' depends on axioms: [propext, Quot.sound]
+'Trefoil.Arithmetic.three_changes_infinity' depends on axioms: [propext, Quot.sound]
+'Trefoil.Arithmetic.plumbing_pair' depends on axioms: [propext, Quot.sound]
+'Trefoil.Arithmetic.even_pivot_signature' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Arithmetic.odd_pivot_signature' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.LatticeBasics.norm_two_support_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.LatticeBasics.odd_det_columns_independent_mod_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.LatticePath.supports_form_path' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.LatticeSupports.norm_two_chain_support_path' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.LatticeSupports.dot_zero_iff_disjoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.no_lattice_configuration' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.LatticeSigns.signed_chain' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.LatticeBlocks.exists_frame' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.LatticeShapes.extract_rowA' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.LatticeShapes.extract_rowB' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.LatticeShapes.extract_rowC' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.LatticeParity.mem_blockRootSpan_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.LatticeFrameParity.frame_B_not_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.LatticeExtraction.configuration_of_frame' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.LatticeExtraction.no_embedding' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.LatticeOddBasis.selected_columns_independent_mod_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Trefoil.LatticeOddBasis.of_odd_basis' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.LatticeOddBasis.no_odd_basis_embedding' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Finite.candidates_complete' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Finite.scaled_correction_spec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Finite.single_vector_obstructions' does not depend on any axioms
+'Trefoil.Finite.doubling_obstruction' depends on axioms: [propext]
+'Trefoil.Finite.no_reduced_correction_comparison' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Consequences.lower_bound_245' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Consequences.lower_bound_lattice' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Consequences.strict_saving' depends on axioms: [propext, Quot.sound]
+'Trefoil.Consequences.plumbing_saving' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Trefoil.Consequences.family_injective' depends on axioms: [propext, Quot.sound]
+structure Trefoil.LatticeEmbedding.Embedding (m : ℕ) : Type
+number of parameters: 1
+fields:
+  Trefoil.LatticeEmbedding.Embedding.root : Trefoil.LatticeEmbedding.RootIndex m → Trefoil.LatticeEmbedding.Vector m
+  Trefoil.LatticeEmbedding.Embedding.A : Trefoil.LatticeEmbedding.Vector m
+  Trefoil.LatticeEmbedding.Embedding.B : Trefoil.LatticeEmbedding.Vector m
+  Trefoil.LatticeEmbedding.Embedding.C : Trefoil.LatticeEmbedding.Vector m
+  Trefoil.LatticeEmbedding.Embedding.root_pairing : ∀ (r s : Trefoil.LatticeEmbedding.RootIndex m),
+      Trefoil.LatticeSupports.dot (self.root r) (self.root s) = Trefoil.LatticeEmbedding.rootGram r s
+  Trefoil.LatticeEmbedding.Embedding.normA : ∑ j, self.A j ^ 2 = 4
+  Trefoil.LatticeEmbedding.Embedding.normB : ∑ j, self.B j ^ 2 = 6
+  Trefoil.LatticeEmbedding.Embedding.normC : ∑ j, self.C j ^ 2 = 3
+  Trefoil.LatticeEmbedding.Embedding.pairingAB : Trefoil.LatticeSupports.dot self.A self.B = -1
+  Trefoil.LatticeEmbedding.Embedding.pairingAC : Trefoil.LatticeSupports.dot self.A self.C = 0
+  Trefoil.LatticeEmbedding.Embedding.pairingBC : Trefoil.LatticeSupports.dot self.B self.C = 0
+  Trefoil.LatticeEmbedding.Embedding.pairingA_root : ∀ (r : Trefoil.LatticeEmbedding.RootIndex m),
+      Trefoil.LatticeSupports.dot self.A (self.root r) = Trefoil.LatticeEmbedding.aRootPairing r
+  Trefoil.LatticeEmbedding.Embedding.pairingB_root : ∀ (r : Trefoil.LatticeEmbedding.RootIndex m),
+      Trefoil.LatticeSupports.dot self.B (self.root r) = Trefoil.LatticeEmbedding.bRootPairing r
+  Trefoil.LatticeEmbedding.Embedding.pairingC_root : ∀ (r : Trefoil.LatticeEmbedding.RootIndex m),
+      Trefoil.LatticeSupports.dot self.C (self.root r) = Trefoil.LatticeEmbedding.cRootPairing r
+  Trefoil.LatticeEmbedding.Embedding.independent : LinearIndependent (ZMod 2) fun r =>
+      match (motive := Option (Trefoil.LatticeEmbedding.RootIndex m) → Trefoil.LatticeEmbedding.Ambient m → ZMod 2)
+        r with
+      | none => fun j => ↑(self.B j)
+      | some i => fun j => ↑(self.root i j)
+constructor:
+  Trefoil.LatticeEmbedding.Embedding.mk {m : ℕ}
+    (root : Trefoil.LatticeEmbedding.RootIndex m → Trefoil.LatticeEmbedding.Vector m)
+    (A B C : Trefoil.LatticeEmbedding.Vector m)
+    (root_pairing :
+      ∀ (r s : Trefoil.LatticeEmbedding.RootIndex m),
+        Trefoil.LatticeSupports.dot (root r) (root s) = Trefoil.LatticeEmbedding.rootGram r s)
+    (normA : ∑ j, A j ^ 2 = 4) (normB : ∑ j, B j ^ 2 = 6) (normC : ∑ j, C j ^ 2 = 3)
+    (pairingAB : Trefoil.LatticeSupports.dot A B = -1) (pairingAC : Trefoil.LatticeSupports.dot A C = 0)
+    (pairingBC : Trefoil.LatticeSupports.dot B C = 0)
+    (pairingA_root :
+      ∀ (r : Trefoil.LatticeEmbedding.RootIndex m),
+        Trefoil.LatticeSupports.dot A (root r) = Trefoil.LatticeEmbedding.aRootPairing r)
+    (pairingB_root :
+      ∀ (r : Trefoil.LatticeEmbedding.RootIndex m),
+        Trefoil.LatticeSupports.dot B (root r) = Trefoil.LatticeEmbedding.bRootPairing r)
+    (pairingC_root :
+      ∀ (r : Trefoil.LatticeEmbedding.RootIndex m),
+        Trefoil.LatticeSupports.dot C (root r) = Trefoil.LatticeEmbedding.cRootPairing r)
+    (independent :
+      LinearIndependent (ZMod 2) fun r =>
+        match (motive := Option (Trefoil.LatticeEmbedding.RootIndex m) → Trefoil.LatticeEmbedding.Ambient m → ZMod 2)
+          r with
+        | none => fun j => ↑(B j)
+        | some i => fun j => ↑(root i j)) :
+    Trefoil.LatticeEmbedding.Embedding m
+structure Trefoil.LatticeConfiguration (m : ℤ) : Type
+number of parameters: 1
+fields:
+  Trefoil.LatticeConfiguration.a : ℤ
+  Trefoil.LatticeConfiguration.b : ℤ
+  Trefoil.LatticeConfiguration.c : ℤ
+  Trefoil.LatticeConfiguration.z : ℤ
+  Trefoil.LatticeConfiguration.g : ℤ
+  Trefoil.LatticeConfiguration.ell : ℤ
+  Trefoil.LatticeConfiguration.rA : ℤ
+  Trefoil.LatticeConfiguration.sA : ℤ
+  Trefoil.LatticeConfiguration.tA : ℤ
+  Trefoil.LatticeConfiguration.rB : ℤ
+  Trefoil.LatticeConfiguration.sB : ℤ
+  Trefoil.LatticeConfiguration.tB : ℤ
+  Trefoil.LatticeConfiguration.rC : ℤ
+  Trefoil.LatticeConfiguration.sC : ℤ
+  Trefoil.LatticeConfiguration.tC : ℤ
+  Trefoil.LatticeConfiguration.normA : m * self.a ^ 2 + 2 * self.a + 1 + 3 * self.z ^ 2 + 2 * self.rA ^ 2 +
+          2 * self.sA ^ 2 +
+        self.tA ^ 2 =
+      4
+  Trefoil.LatticeConfiguration.normB : m * self.b ^ 2 + (self.g - 1) ^ 2 + 2 * self.g ^ 2 + 2 * self.rB ^ 2 +
+          2 * self.sB ^ 2 +
+        self.tB ^ 2 =
+      6
+  Trefoil.LatticeConfiguration.normC : m * self.c ^ 2 + 2 * self.ell ^ 2 + (self.ell + 1) ^ 2 + 2 * self.rC ^ 2 +
+          2 * self.sC ^ 2 +
+        self.tC ^ 2 =
+      3
+  Trefoil.LatticeConfiguration.pairingAB : (m * self.a + 1) * self.b + self.z * (3 * self.g - 1) +
+          2 * (self.rA * self.rB + self.sA * self.sB) +
+        self.tA * self.tB =
+      -1
+  Trefoil.LatticeConfiguration.pairingAC : (m * self.a + 1) * self.c + self.z * (3 * self.ell + 1) +
+          2 * (self.rA * self.rC + self.sA * self.sC) +
+        self.tA * self.tC =
+      0
+  Trefoil.LatticeConfiguration.pairingBC : m * self.b * self.c + 3 * self.g * self.ell + self.g - self.ell +
+          2 * (self.rB * self.rC + self.sB * self.sC) +
+        self.tB * self.tC =
+      0
+  Trefoil.LatticeConfiguration.independentB : ¬(m * self.b % 2 = 0 ∧ (3 * self.g - 1) % 2 = 0 ∧ self.tB % 2 = 0)
+constructor:
+  Trefoil.LatticeConfiguration.mk {m : ℤ} (a b c z g ell rA sA tA rB sB tB rC sC tC : ℤ)
+    (normA : m * a ^ 2 + 2 * a + 1 + 3 * z ^ 2 + 2 * rA ^ 2 + 2 * sA ^ 2 + tA ^ 2 = 4)
+    (normB : m * b ^ 2 + (g - 1) ^ 2 + 2 * g ^ 2 + 2 * rB ^ 2 + 2 * sB ^ 2 + tB ^ 2 = 6)
+    (normC : m * c ^ 2 + 2 * ell ^ 2 + (ell + 1) ^ 2 + 2 * rC ^ 2 + 2 * sC ^ 2 + tC ^ 2 = 3)
+    (pairingAB : (m * a + 1) * b + z * (3 * g - 1) + 2 * (rA * rB + sA * sB) + tA * tB = -1)
+    (pairingAC : (m * a + 1) * c + z * (3 * ell + 1) + 2 * (rA * rC + sA * sC) + tA * tC = 0)
+    (pairingBC : m * b * c + 3 * g * ell + g - ell + 2 * (rB * rC + sB * sC) + tB * tC = 0)
+    (independentB : ¬(m * b % 2 = 0 ∧ (3 * g - 1) % 2 = 0 ∧ tB % 2 = 0)) : Trefoil.LatticeConfiguration m
+def Trefoil.Finite.ReducedForm : ℤ → ℤ → ℤ → Prop :=
+fun h a s => 0 ≤ a ∧ a < h ∧ h ≤ s ∧ h % 2 = 0 ∧ s % 2 = 0 ∧ (2 * h - 1) * (2 * s - 1) - 4 * a ^ 2 = 245
+def Trefoil.Finite.HasCorrectionComparison : ℤ → ℤ → ℤ → Prop :=
+fun h a s =>
+  ∃ label,
+    (∀ (x : Trefoil.Finite.ZVector), label (x + x) = Trefoil.Finite.doubleLabel (label x)) ∧
+      ∀ (x : Trefoil.Finite.ZVector) (z : Trefoil.Finite.QVector),
+        ((Trefoil.Finite.surgeryMatrix h a s).mulVec z = fun i => ↑(x i)) →
+          ∃ n, Trefoil.Finite.quadraticBound x z - Trefoil.Finite.dY (label x) = 2 * ↑n
+theorem Trefoil.Consequences.lower_bound_245 : ∀ (u : ℕ),
+  2 ≤ u → (u = 2 → ∃ h a s, Trefoil.Finite.ReducedForm h a s ∧ Trefoil.Finite.HasCorrectionComparison h a s) → 3 ≤ u :=
+fun u hu realize =>
+  Decidable.byContradiction fun hn =>
+    have heq := Decidable.byContradiction fun a => Trefoil.Consequences.lower_bound_245._proof_1_1 u hu hn a;
+    Exists.casesOn (realize heq) fun h h_1 =>
+      Exists.casesOn h_1 fun a h_2 =>
+        Exists.casesOn h_2 fun s h_3 =>
+          And.casesOn h_3 fun hf hc => Trefoil.Finite.no_reduced_correction_comparison hf hc
+theorem Trefoil.Consequences.lower_bound_lattice : ∀ (m u : ℕ),
+  m = 4 ∨ 6 ≤ m → 2 ≤ u → (u = 2 → Nonempty (Trefoil.LatticeEmbedding.Embedding m)) → 3 ≤ u :=
+fun m u hm hu realize =>
+  Decidable.byContradiction fun hn =>
+    have heq := Decidable.byContradiction fun a => Trefoil.Consequences.lower_bound_lattice._proof_1_1 u hu hn a;
+    Nonempty.casesOn (realize heq) fun embedding => Trefoil.LatticeExtraction.no_embedding hm embedding
